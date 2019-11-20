@@ -1,0 +1,6 @@
+/.idea
+/Pygma.App/appsettings.Development.json
+bin/
+obj/
+.vs/
+Pygma.sln.DotSettings.user
