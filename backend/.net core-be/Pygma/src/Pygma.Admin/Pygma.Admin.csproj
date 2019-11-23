@@ -8,4 +8,8 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\data\Pygma.Data\Pygma.Data.csproj" />
+  </ItemGroup>
+
 </Project>

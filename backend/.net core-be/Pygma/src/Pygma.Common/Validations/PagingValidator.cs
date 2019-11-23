@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using TrFoil.Backbone.Common.Abstractions;
+using Pygma.Common.Abstractions;
 
-namespace TrFoil.Backbone.Common.Validations
+namespace Pygma.Common.Validations
 {
     public class PagingValidator : AbstractValidator<IPaging>
     {

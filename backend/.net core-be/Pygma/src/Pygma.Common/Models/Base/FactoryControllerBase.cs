@@ -1,4 +1,4 @@
-﻿namespace TrFoil.Backbone.Common.Models.Base
+﻿namespace Pygma.Common.Models.Base
 {
     //[Authorize(Roles = Roles.Factory)]        
 

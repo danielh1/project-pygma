@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TrFoil.Backbone.Common.Abstractions;
-using TrFoil.Backbone.Domain.Enums;
+using Pygma.Common.Abstractions;
+using Pygma.Data.Domain.Enums;
 
-namespace TrFoil.Backbone.Common.Models.Base
+namespace Pygma.Common.Models.Base
 {
     public abstract class SearchFiltersBase<T> : IPaging
     {

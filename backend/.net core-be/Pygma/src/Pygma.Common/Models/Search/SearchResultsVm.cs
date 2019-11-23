@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace TrFoil.Backbone.Common.Models.Search
+namespace Pygma.Common.Models.Search
 {
     public class SearchResultsVm<TViewModel> where TViewModel : class
     {

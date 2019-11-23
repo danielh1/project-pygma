@@ -4,7 +4,7 @@ using Pygma.Data.Domain.Enums;
 
 namespace Pygma.Data.Domain.Entities
 {
-    public class IncidentsLog : EntityBase
+    public class IncidentLog : EntityBase
     {
         [Required]
         public string Message { get; set; }

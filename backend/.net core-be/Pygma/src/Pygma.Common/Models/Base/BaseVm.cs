@@ -1,6 +1,6 @@
-﻿using TrFoil.Backbone.Common.Abstractions;
+﻿using Pygma.Common.Abstractions;
 
-namespace TrFoil.Backbone.Common.Models.Base
+namespace Pygma.Common.Models.Base
 {
     public class BaseVm : IBaseVm
     {

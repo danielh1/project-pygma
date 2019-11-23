@@ -2,16 +2,29 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
+        <UserSecretsId>32e7be78-0ecd-48cb-9d05-2266d7d11cd5</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Autofac" Version="4.9.4" />
-      <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
+      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Autofac\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\Pygma.Admin\Pygma.Admin.csproj" />
+      <ProjectReference Include="..\src\Pygma.Blog\Pygma.Blog.csproj" />
+      <ProjectReference Include="..\src\Pygma.Common\Pygma.Common.csproj" />
+      <ProjectReference Include="..\src\services\Pygma.Services.Bootstrapper\Pygma.Services.Bootstrapper.csproj" />
+      <ProjectReference Include="..\src\services\Pygma.Services.Users\Pygma.Services.Users.csproj" />
     </ItemGroup>
 
 </Project>

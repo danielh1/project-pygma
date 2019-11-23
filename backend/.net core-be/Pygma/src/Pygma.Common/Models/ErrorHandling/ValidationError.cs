@@ -1,4 +1,4 @@
-﻿namespace TrFoil.Backbone.Common.Models.ErrorHandling
+﻿namespace Pygma.Common.Models.ErrorHandling
 {
     public class ValidationError
     {

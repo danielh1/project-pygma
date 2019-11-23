@@ -4,7 +4,7 @@ using Autofac;
 using AutoMapper;
 using Module = Autofac.Module;
 
-namespace TrFoil.Backbone.App.Autofac.Modules
+namespace Pygma.App.Autofac.Modules
 {
     public class AutoMapperModule : Module
     {

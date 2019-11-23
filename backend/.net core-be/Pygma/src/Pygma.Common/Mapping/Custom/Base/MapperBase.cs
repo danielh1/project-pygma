@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace TrFoil.Backbone.Common.Mapping.Custom
+namespace Pygma.Common.Mapping.Custom.Base
 {
     public abstract class MapperBase
     {

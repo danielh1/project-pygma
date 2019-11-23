@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TrFoil.Backbone.Common.Models.Base
+namespace Pygma.Common.Models.Base
 {
     [ApiController]
     //[Produces("application/json")]

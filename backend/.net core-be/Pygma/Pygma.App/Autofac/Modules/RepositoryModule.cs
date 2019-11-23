@@ -3,7 +3,7 @@ using System.Reflection;
 using Autofac;
 using Module = Autofac.Module;
 
-namespace TrFoil.Backbone.App.Autofac.Modules
+namespace Pygma.App.Autofac.Modules
 {
     public class RepositoryModule : Module
     {

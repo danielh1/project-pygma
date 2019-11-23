@@ -14,4 +14,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\data\Pygma.Data.Domain\Pygma.Data.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
