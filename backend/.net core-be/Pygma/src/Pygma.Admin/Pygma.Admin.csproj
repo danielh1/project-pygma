@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -10,6 +10,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\data\Pygma.Data\Pygma.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\Base" />
+    <Folder Include="Filters" />
+    <Folder Include="Services" />
+    <Folder Include="Validations" />
+    <Folder Include="ViewModels" />
   </ItemGroup>
 
 </Project>

@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Pygma.Data.Domain\Pygma.Data.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SearchSpecifications\" />
+  </ItemGroup>
+
 </Project>
