@@ -1,6 +1,6 @@
 ﻿namespace Pygma.Data.Domain.Enums
 {
-    public enum OrderDirectionEnum
+    public enum EnOrderDirection
     {
         Asc = 1,
         Desc = 2

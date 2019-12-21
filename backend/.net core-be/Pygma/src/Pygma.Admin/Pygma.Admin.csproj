@@ -10,10 +10,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\data\Pygma.Data\Pygma.Data.csproj" />
+    <ProjectReference Include="..\Pygma.Common\Pygma.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Base" />
     <Folder Include="Filters" />
     <Folder Include="Services" />
     <Folder Include="Validations" />

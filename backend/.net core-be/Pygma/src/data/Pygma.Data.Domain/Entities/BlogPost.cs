@@ -18,7 +18,7 @@ namespace Pygma.Data.Domain.Entities
         public DateTime? PublishedAt { get; set; }
 
         [Required]
-        public BlogPostStatusEnum Status { get; set; }
+        public EnBlogPostStatus Status { get; set; }
 
         [Required]
         public int AuthorId { get; set; }

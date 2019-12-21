@@ -15,9 +15,9 @@
 
   <ItemGroup>
     <Folder Include="Filters" />
+    <Folder Include="Mapping\Custom" />
     <Folder Include="Services" />
     <Folder Include="Validations" />
-    <Folder Include="ViewModels" />
   </ItemGroup>
 
 </Project>

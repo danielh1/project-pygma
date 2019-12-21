@@ -10,7 +10,7 @@ namespace Pygma.Common.Models.Base
         public T OrderBy { get; set; }
 
         [FromQuery(Name = "orderDirection")]
-        public OrderDirectionEnum OrderDirection { get; set; }
+        public EnOrderDirection EnOrderDirection { get; set; }
 
         [FromQuery(Name = "currentPage")]
         public int CurrentPage { get; set; } = 1;

@@ -1,6 +1,6 @@
 ﻿namespace Pygma.Data.Domain.Enums
 {
-    public enum BlogPostStatusEnum
+    public enum EnBlogPostStatus
     {
         InEdit = 1,
         Published = 2,
