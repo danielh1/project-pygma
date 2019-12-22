@@ -13,13 +13,31 @@ namespace Pygma.Blog.Api
     public class BlogPostCommentsController: BlogControllerBase
     {
         private readonly IBlogPostCommentsRepository _blogPostCommentsRepository;
+        private readonly IBlogPostsRepository _blogPostsRepository;
         private readonly Mapper _mapper;
 
         public BlogPostCommentsController(IBlogPostCommentsRepository blogPostCommentsRepository,
+            IBlogPostsRepository blogPostsRepository,
             Mapper mapper)
         {
             _blogPostCommentsRepository = blogPostCommentsRepository;
+            _blogPostsRepository = blogPostsRepository;
             _mapper = mapper;
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult> CreateBlogPostCommentAsync(int blogPostId,
+            [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
+        {
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
+
+            var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
+            blogPostComment.BlogPostId = blogPost.Id;
+            
+            await _blogPostCommentsRepository.CreateAsync(blogPostComment);
+            
+            return CreatedAtRoute(nameof(GetBlogPostCommentAsync),
+                new {blogPostId = blogPost.Id, itemId = blogPostComment.Id}, null);
         }
         
         [HttpGet("{blogPostCommentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
@@ -30,19 +48,6 @@ namespace Pygma.Blog.Api
             return blogPostComment == null 
                 ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {blogPostCommentId} not found") 
                 : _mapper.Map<BlogPostCommentVm>(blogPostComment);
-        }
-        
-        [HttpPost]
-        public async Task<ActionResult> CreateBlogPostCommentAsync(int blogPostId,
-            [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
-        {
-            var blogPost = await _blogPostCommentsRepository.ReadByIdAsync(blogPostId);
-
-            var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
-            blogPostComment.BlogPostId = blogPost.Id;
-            
-            return CreatedAtRoute(nameof(GetBlogPostCommentAsync),
-                new {blogPostId = blogPost.Id, itemId = blogPostComment.Id}, null);
         }
     }
 }

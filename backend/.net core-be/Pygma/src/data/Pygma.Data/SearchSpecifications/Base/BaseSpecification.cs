@@ -5,7 +5,7 @@ using Pygma.Data.Abstractions.Search;
 using Pygma.Data.Abstractions.SearchSpecifications;
 using Pygma.Data.Domain.Enums;
 
-namespace Pygma.Data.SearchSpecifications
+namespace Pygma.Data.SearchSpecifications.Base
 {
      public abstract class BaseSpecification<T> : ISpecification<T>, ISearchableSpecification<ISearchCriteria<T>>
     {

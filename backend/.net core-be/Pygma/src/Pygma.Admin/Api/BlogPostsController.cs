@@ -3,8 +3,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Admin.Api.Base;
+using Pygma.Admin.ViewModels.ViewModels.Requests.BlogPosts;
+using Pygma.Admin.ViewModels.ViewModels.Responses.BlogPosts;
+using Pygma.Common.Models.Search;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
+using Pygma.Data.SearchCriteria;
+using Pygma.Data.SearchSpecifications;
 
 namespace Pygma.Admin.Api
 {
@@ -21,52 +26,72 @@ namespace Pygma.Admin.Api
             _mapper = mapper;
         }
         
+        #region CRUD
         [HttpPost]
-        public async Task<ActionResult<int>> CreateBlogPostAsync(int orderId, [FromBody] CreateBlogPostVm createBlogPostVm)
+        public async Task<ActionResult<int>> CreateBlogPostAsync([FromBody] CreateBlogPostVm createBlogPostVm)
         {
-            var offer = new BlogPost();
-            await _blogPostsRepository.CreateAsync(_mapper.Map(createBlogPostVm, offer));
+            var blogPost = new BlogPost();
+            await _blogPostsRepository.CreateAsync(_mapper.Map(createBlogPostVm, blogPost));
 
-            return Ok(offer.Id);
+            return Ok(blogPost.Id);
         }
 
         [HttpGet("{blogPostId:int:min(1)}", Name = nameof(GetBlogPostAsync))]
         public async Task<ActionResult<BlogPostVm>> GetBlogPostAsync(int blogPostId)
         {
-             var offer = await _BlogPostsRepository.FindByIdAsync(offerId);
+             var offer = await _blogPostsRepository.ReadByIdAsync(blogPostId);
              
              return _mapper.Map<BlogPostVm>(offer);
         }
 
-        [HttpPut("{offerId:int:min(1)}")]
-        public async Task<ActionResult> UpdateBlogPostAsync(int orderId, int offerId, UpdateBlogPostVm updateBlogPostVm)
+        [HttpPut("{blogPostId:int:min(1)}")]
+        public async Task<ActionResult> UpdateBlogPostAsync(int blogPostId, UpdateBlogPostVm updateBlogPostVm)
         {
-            var offer = await _BlogPostsRepository.FindByIdAsync(offerId);
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
 
-            if (offer is null)
+            if (blogPost is null)
             {
                 return NotFound();
             }
 
-            await _BlogPostsRepository.UpdateAsync(_mapper.Map(updateBlogPostVm, offer));
+            await _blogPostsRepository.UpdateAsync(_mapper.Map(updateBlogPostVm, blogPost));
 
             return NoContent();
         }
-
-        [HttpGet("{offerId:int:min(1)}/export")]
-        public async Task<FileStreamResult> ExportCabinetOrderAsync(int orderId, int offerId)
+        
+        [HttpDelete("{blogPostId:int:min(1)}")]
+        public async Task<ActionResult> DeleteBlogPostAsync(int blogPostId)
         {
-            var cabinetOrder = await _cabinetOrdersRepository.FindByIdExportFullAsync(orderId);
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
 
-            // update order with customer margin
-            
-            var webRootFolder = _hostingEnvironment.WebRootPath + "/CabinetOrders";
-            var fileName = $"CabinetOrder-{orderId}-Offer-{offerId}.xlsx";
+            if (blogPost is null)
+            {
+                return NotFound();
+            }
 
-            var memoryStream = await ExcelHelpers
-                .ExportToMemory(webRootFolder, fileName, new CabinetsOrderExcelExporter(cabinetOrder));
+            await _blogPostsRepository.DeleteAsync(blogPostId);
 
-            return File(memoryStream, ContentType.Excel, fileName);
+            return NoContent();
+        }
+        #endregion
+        
+        [HttpGet]
+        public async Task<SearchResultsVm<BlogPostSrVm[]>> SearchAsync(BlogPostSc sc)
+        {
+            var specification = new BlogPostSpecification();
+            specification.SetCriteria(sc);
+
+            var itemsOnPage = await _blogPostsRepository.SearchAsync(specification);
+            var totalItems = await _blogPostsRepository.CountAsync(specification);
+
+            var results = new SearchResultsVm<BlogPostSrVm[]>(
+                _mapper.Map<BlogPostSrVm[]>(itemsOnPage),
+                totalItems,
+                itemsOnPage.Count,
+                sc.CurrentPage,
+                sc.Take);
+
+            return results;
         }
     }
 }

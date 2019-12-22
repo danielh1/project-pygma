@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
 namespace Pygma.Users.ViewModels.Requests
 {
-    public class RegisterAccountVm
+    public class LoginVm
     {
         public string Email { get; set; }
         

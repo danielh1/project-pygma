@@ -9,4 +9,9 @@
       <ProjectReference Include="..\Pygma.Common\Pygma.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+    </ItemGroup>
+
 </Project>

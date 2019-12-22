@@ -3,8 +3,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Common.Models.Base;
-using Pygma.Data.Abstractions.Cache;
 using Pygma.Data.Abstractions.Repositories;
+using Pygma.Users.Services;
 using Pygma.Users.ViewModels.Requests;
 using Pygma.Users.ViewModels.Responses;
 
@@ -15,34 +15,32 @@ namespace Pygma.Users.Api
     public class UsersController: CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IUsersCache _usersCache;
+        private readonly IJwtTokenService _jwtTokenService;
         private readonly IMapper _mapper;
 
 
         public UsersController(IUsersRepository usersRepository,
-            IUsersCache usersCache,
+            IJwtTokenService jwtTokenService,
             IMapper mapper)
         {
             _usersRepository = usersRepository;
-            _usersCache = usersCache;
+            _jwtTokenService = jwtTokenService;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public ActionResult<UserListVm[]> SearchUsers()
+        [HttpGet("all")]
+        public async Task<ActionResult<UserListVm[]>> GetAll()
         {
-            return _mapper.Map<UserListVm[]>(_usersCache.GetAll());
+            return _mapper.Map<UserListVm[]>(await _usersRepository.ReadAllAsync());
         }
 
         [HttpGet("{userId:int:min(1)}")]
-        [Authorize]    
-        public ActionResult<UserVm> GetUser(int userId)
+        public async Task<ActionResult<UserVm>> GetUser(int userId)
         {
-            return _mapper.Map<UserVm>(_usersCache.GetById(userId));
+            return _mapper.Map<UserVm>(await _usersRepository.ReadByIdAsync(userId));
         }
 
         [HttpPut("{userId:int:min(1)}")]
-        [Authorize]    
         public async Task<ActionResult> UpdateUserAsync(int userId, UpdateUserVm updateUserVm)
         {
             var user = await _usersRepository.ReadByIdAsync(userId);
@@ -54,7 +52,42 @@ namespace Pygma.Users.Api
             
             await _usersRepository.UpdateAsync(user);
             
-            return Ok();
+            return NoContent();
+        }
+        
+        [HttpDelete("{userId:int:min(1)}")]
+        public async Task<ActionResult> DeleteUserAsync(int userId)
+        {
+            var user = await _usersRepository.ReadByIdAsync(userId);
+
+            if (user == null)
+                return NotFound();
+
+            await _usersRepository.DeleteAsync(userId);
+            
+            return NoContent();
+        }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginVm loginVm)
+        {
+            IActionResult response;
+            
+            var user = _usersRepository.LoginAsync(loginVm.Email, loginVm.Password);
+ 
+            if (user != null)
+            {
+                var tokenString = _jwtTokenService.BuildToken(user.Id);
+                
+                response = Ok( new { token = tokenString });
+            }
+            else
+            {
+                response = Unauthorized();
+            }
+ 
+            return response;
         }
     }
 }

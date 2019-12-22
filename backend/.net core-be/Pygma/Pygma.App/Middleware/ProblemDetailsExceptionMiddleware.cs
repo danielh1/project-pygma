@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Pygma.App.Middleware
 {
     public sealed class ProblemDetailsExceptionMiddleware
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IHostEnvironment _env;
         private readonly RequestDelegate _next;
 
-        public ProblemDetailsExceptionMiddleware(RequestDelegate next, IHostingEnvironment env)
+        public ProblemDetailsExceptionMiddleware(RequestDelegate next, IHostEnvironment env)
         {
             this._next = next;
             _env = env;
@@ -32,7 +33,7 @@ namespace Pygma.App.Middleware
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception, IHostingEnvironment env)
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception, IHostEnvironment env)
         {
             var problemDetails = new ProblemDetails();
 
@@ -41,7 +42,7 @@ namespace Pygma.App.Middleware
                 problemDetails.Title = "The request is invalid";
                 problemDetails.Status = badHttpRequestException.StatusCode;
                 problemDetails.Instance = $"urn:CHANGEME:bad-request:{Guid.NewGuid()}";
-
+                
                 if (env.IsDevelopment())
                 {
                     problemDetails.Detail = badHttpRequestException.Message;

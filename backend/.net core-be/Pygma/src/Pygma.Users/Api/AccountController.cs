@@ -16,33 +16,13 @@ namespace Pygma.Users.Api
     public class AccountController : CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AccountController(
-            IUsersRepository usersRepository,
-            IHttpContextAccessor httpContextAccessor)
+            IUsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
-            _httpContextAccessor = httpContextAccessor;
         }
 
-        [HttpGet]
-        [Route("test")]
-        public IActionResult Test()
-        {
-            //[FromBody]RegistrationRequest registerAccountVm
-            //IActionResult response = Unauthorized();
-            //var user = Authenticate(login);
-
-            //if (user != null)
-            //{
-            //    var tokenString = BuildToken(user);
-            //    response = Ok(new { token = tokenString });
-            //}
-
-            return Ok();
-        }
-        
         [HttpPost("registration")]
         public async Task<ActionResult> RegisterAsync([FromBody] RegisterAccountVm registerAccountVm)
         {
@@ -57,6 +37,7 @@ namespace Pygma.Users.Api
             var newUser = new User()
             {
                 Email = registerAccountVm.Email,
+                Password = registerAccountVm.Password,
                 Active = false,
                 CreatedAt = DateTime.Now
             };

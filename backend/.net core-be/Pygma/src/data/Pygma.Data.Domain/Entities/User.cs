@@ -15,6 +15,11 @@ namespace Pygma.Data.Domain.Entities
         [MaxLength(50)]
         [Required]
         public string Email { get; set; }
+        
+        [MaxLength(50)]
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
 
         [Required]
         public string Role { get; set; }

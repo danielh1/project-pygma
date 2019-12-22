@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Pygma.Common.Models.Base;
+using Pygma.Data.Domain.Entities;
 using Pygma.Users.ViewModels.Requests;
 using Pygma.Users.ViewModels.Responses;
 
@@ -9,13 +11,7 @@ namespace Pygma.Users.Mapping.Auto.Profiles
         public UserProfile()
         {
             CreateMap<User, UserListVm>(MemberList.Destination);
-            CreateMap<User, UserVm>(MemberList.Destination)
-                .ForMember(d => d.Partner,
-                    opt => opt.MapFrom(
-                        s => s.PartnerId.HasValue
-                            ? new BaseVm {Id = s.PartnerId.Value, Name = s.Partner.Name}
-                            : null));
-
+            CreateMap<User, UserVm>(MemberList.Destination);
             CreateMap<UpdateUserVm, User>(MemberList.Source);
         }
     }

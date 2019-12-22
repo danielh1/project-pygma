@@ -1,6 +1,7 @@
 using Pygma.Data.Abstractions.SearchSpecifications;
 using Pygma.Data.Domain.Entities;
 using Pygma.Data.SearchCriteria;
+using Pygma.Data.SearchSpecifications.Base;
 
 namespace Pygma.Data.SearchSpecifications
 {

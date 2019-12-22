@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
@@ -9,6 +14,12 @@ namespace Pygma.Data.Repositories
     {
         public UsersRepository(DbContext context) : base(context)
         {
+        }
+        
+        public Task<List<User>> ReadAllAsync() => DbTable.ToListAsync();
+        public Task<User> LoginAsync(string email, string password)
+        {
+            return DbTable.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
         }
     }
 }
