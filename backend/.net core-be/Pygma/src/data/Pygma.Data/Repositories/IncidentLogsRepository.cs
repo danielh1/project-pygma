@@ -5,7 +5,7 @@ using Pygma.Data.Repositories.Base;
 
 namespace Pygma.Data.Repositories
 {
-    public class IncidentLogsRepository : RepositoryBase<IncidentLog>, IIncidentLogsRepository
+    public class IncidentLogsRepository : RepositoryBase<Log>, IIncidentLogsRepository
     {
         public IncidentLogsRepository(DbContext context) : base(context)
         {

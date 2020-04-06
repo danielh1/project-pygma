@@ -11,20 +11,17 @@ using Pygma.Users.ViewModels.Responses;
 namespace Pygma.Users.Api
 {
     [Route("api/users")]
-    [Authorize]    
-    public class UsersController: CommonControllerBase
+    [Authorize]
+    public class UsersController : CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IJwtTokenService _jwtTokenService;
         private readonly IMapper _mapper;
 
 
         public UsersController(IUsersRepository usersRepository,
-            IJwtTokenService jwtTokenService,
             IMapper mapper)
         {
             _usersRepository = usersRepository;
-            _jwtTokenService = jwtTokenService;
             _mapper = mapper;
         }
 
@@ -49,12 +46,12 @@ namespace Pygma.Users.Api
                 return NotFound();
 
             _mapper.Map(updateUserVm, user);
-            
+
             await _usersRepository.UpdateAsync(user);
-            
+
             return NoContent();
         }
-        
+
         [HttpDelete("{userId:int:min(1)}")]
         public async Task<ActionResult> DeleteUserAsync(int userId)
         {
@@ -64,30 +61,8 @@ namespace Pygma.Users.Api
                 return NotFound();
 
             await _usersRepository.DeleteAsync(userId);
-            
+
             return NoContent();
-        }
-        
-        [AllowAnonymous]
-        [HttpPost]
-        public IActionResult Login([FromBody] LoginVm loginVm)
-        {
-            IActionResult response;
-            
-            var user = _usersRepository.LoginAsync(loginVm.Email, loginVm.Password);
- 
-            if (user != null)
-            {
-                var tokenString = _jwtTokenService.BuildToken(user.Id);
-                
-                response = Ok( new { token = tokenString });
-            }
-            else
-            {
-                response = Unauthorized();
-            }
- 
-            return response;
         }
     }
 }

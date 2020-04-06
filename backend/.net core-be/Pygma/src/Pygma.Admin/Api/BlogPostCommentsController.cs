@@ -12,7 +12,7 @@ using Pygma.Data.SearchSpecifications;
 
 namespace Pygma.Admin.Api
 {
-    [Route("api/blog-posts/{blogPostId:int:min(1)}/comments")]
+    [Route("api/blog-posts/{id:int:min(1)}/comments")]
     public class BlogPostCommentsController: AdminControllerBase
     {
         private readonly IBlogPostCommentsRepository _blogPostCommentsRepository;
@@ -30,10 +30,10 @@ namespace Pygma.Admin.Api
 
         #region CRUD
         [HttpPost]
-        public async Task<ActionResult> CreateBlogPostCommentAsync(int blogPostId,
+        public async Task<ActionResult> CreateBlogPostCommentAsync(int id,
             [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
         {
-            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
 
             var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
             blogPostComment.BlogPostId = blogPost.Id;
@@ -44,20 +44,20 @@ namespace Pygma.Admin.Api
                 new {blogPostId = blogPost.Id, itemId = blogPostComment.Id}, null);
         }
         
-        [HttpGet("{blogPostCommentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
-        public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int blogPostId, int blogPostCommentId)
+        [HttpGet("{commentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
+        public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int id, int commentId)
         {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(blogPostCommentId, blogPostId);
+            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
 
             return blogPostComment == null 
-                ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {blogPostCommentId} not found") 
+                ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {commentId} not found") 
                 : _mapper.Map<BlogPostCommentVm>(blogPostComment);
         }
         
-        [HttpPut("{blogPostId:int:min(1)}")]
-        public async Task<ActionResult> UpdateBlogPostCommentAsync(int blogPostCommentId, UpdateBlogPostCommentVm updateBlogPostCommentVm)
+        [HttpPut("{commentId:int:min(1)}")]
+        public async Task<ActionResult> UpdateBlogPostCommentAsync(int id, int commentId, UpdateBlogPostCommentVm updateBlogPostCommentVm)
         {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAsync(blogPostCommentId);
+            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAsync(commentId);
 
             if (blogPostComment is null)
             {
@@ -69,39 +69,20 @@ namespace Pygma.Admin.Api
             return NoContent();
         }
         
-        [HttpDelete("{blogPostCommentId:int:min(1)}")]
-        public async Task<ActionResult> DeleteBlogPostCommentAsync(int blogPostCommentId)
+        [HttpDelete("{commentId:int:min(1)}")]
+        public async Task<ActionResult> DeleteBlogPostCommentAsync(int commentId)
         {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAsync(blogPostCommentId);
+            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAsync(commentId);
 
             if (blogPostComment is null)
             {
                 return NotFound();
             }
 
-            await _blogPostsRepository.DeleteAsync(blogPostCommentId);
+            await _blogPostsRepository.DeleteAsync(commentId);
 
             return NoContent();
         }
         #endregion
-        
-        [HttpGet]
-        public async Task<SearchResultsVm<BlogPostSrVm[]>> SearchAsync(BlogPostSc sc)
-        {
-            var specification = new BlogPostSpecification();
-            specification.SetCriteria(sc);
-
-            var itemsOnPage = await _blogPostsRepository.SearchAsync(specification);
-            var totalItems = await _blogPostsRepository.CountAsync(specification);
-
-            var results = new SearchResultsVm<BlogPostSrVm[]>(
-                _mapper.Map<BlogPostSrVm[]>(itemsOnPage),
-                totalItems,
-                itemsOnPage.Count,
-                sc.CurrentPage,
-                sc.Take);
-
-            return results;
-        }
     }
 }

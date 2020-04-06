@@ -9,7 +9,7 @@ using Pygma.Data.Domain.Entities;
 
 namespace Pygma.Blog.Api
 {
-    [Route("api/blog-posts/{blogPostId:int:min(1)}/comments")]
+    [Route("api/blog-posts/{id:int:min(1)}/comments")]
     public class BlogPostCommentsController: BlogControllerBase
     {
         private readonly IBlogPostCommentsRepository _blogPostCommentsRepository;
@@ -26,10 +26,10 @@ namespace Pygma.Blog.Api
         }
         
         [HttpPost]
-        public async Task<ActionResult> CreateBlogPostCommentAsync(int blogPostId,
+        public async Task<ActionResult> CreateBlogPostCommentAsync(int id,
             [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
         {
-            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
 
             var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
             blogPostComment.BlogPostId = blogPost.Id;
@@ -40,13 +40,13 @@ namespace Pygma.Blog.Api
                 new {blogPostId = blogPost.Id, itemId = blogPostComment.Id}, null);
         }
         
-        [HttpGet("{blogPostCommentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
-        public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int blogPostId, int blogPostCommentId)
+        [HttpGet("{commentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
+        public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int id, int commentId)
         {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(blogPostCommentId, blogPostId);
+            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
 
             return blogPostComment == null 
-                ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {blogPostCommentId} not found") 
+                ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {commentId} not found") 
                 : _mapper.Map<BlogPostCommentVm>(blogPostComment);
         }
     }

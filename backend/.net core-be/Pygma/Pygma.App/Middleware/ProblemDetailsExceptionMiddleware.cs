@@ -53,12 +53,12 @@ namespace Pygma.App.Middleware
             {
                 problemDetails.Title = "An unexpected error occurred!";
                 problemDetails.Status = StatusCodes.Status500InternalServerError;
-                problemDetails.Instance = $"urn:CHANGEME:internal-server-error:{Guid.NewGuid()}";
+                problemDetails.Instance = $"urn:pygma:internal-server-error:{Guid.NewGuid()}";
 
-                //if (env.IsDevelopment())
-                //{
-                problemDetails.Detail = exception.Demystify().ToString();
-                // }
+                if (env.IsDevelopment())
+                {
+                    problemDetails.Detail = exception.Demystify().ToString();
+                }
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
 

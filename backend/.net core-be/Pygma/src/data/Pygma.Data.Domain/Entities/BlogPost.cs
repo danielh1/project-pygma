@@ -19,7 +19,7 @@ namespace Pygma.Data.Domain.Entities
 
         [Required]
         public EnBlogPostStatus Status { get; set; }
-
+        
         [Required]
         public int AuthorId { get; set; }
 

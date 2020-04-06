@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
+using Pygma.Users.Services;
 using Pygma.Users.ViewModels.Requests;
 
 namespace Pygma.Users.Api
@@ -16,11 +17,14 @@ namespace Pygma.Users.Api
     public class AccountController : CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
-
+        private readonly IJwtTokenService _jwtTokenService;
+        
         public AccountController(
-            IUsersRepository usersRepository)
+            IUsersRepository usersRepository,
+            IJwtTokenService jwtTokenService)
         {
             _usersRepository = usersRepository;
+            _jwtTokenService = jwtTokenService;
         }
 
         [HttpPost("registration")]
@@ -45,6 +49,28 @@ namespace Pygma.Users.Api
             await _usersRepository.CreateAsync(newUser);
 
             return Ok();
+        }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginVm loginVm)
+        {
+            IActionResult response;
+            
+            var user = _usersRepository.LoginAsync(loginVm.Email, loginVm.Password);
+ 
+            if (user != null)
+            {
+                var tokenString = _jwtTokenService.BuildToken(user.Id);
+                
+                response = Ok( new { token = tokenString });
+            }
+            else
+            {
+                response = Unauthorized();
+            }
+ 
+            return response;
         }
     }
 }

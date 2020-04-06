@@ -2,7 +2,7 @@
 
 namespace Pygma.Data.Abstractions.Repositories
 {
-    public interface IIncidentLogsRepository : IRepositoryBase<IncidentLog>
+    public interface IIncidentLogsRepository : IRepositoryBase<Log>
     {
         
     }
