@@ -11,7 +11,7 @@ namespace Pygma.UatTests.TestDb
             using var transaction = dbContext.Database.BeginTransaction();
             var seeding = new List<ISeeder>()
             {
-                //new UsersSeed(),
+                new UsersSeed(),
                 //new BlogPostSeed(),
                 //new BlogPostCommentSeed(),
             };
