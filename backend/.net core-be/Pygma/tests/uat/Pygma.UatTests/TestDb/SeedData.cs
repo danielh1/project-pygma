@@ -12,8 +12,8 @@ namespace Pygma.UatTests.TestDb
             var seeding = new List<ISeeder>()
             {
                 new UsersSeed(),
-                //new BlogPostSeed(),
-                //new BlogPostCommentSeed(),
+                new BlogPostSeed(),
+                new BlogPostCommentSeed(),
             };
 
             foreach (var seeder in seeding)

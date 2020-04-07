@@ -22,7 +22,7 @@ namespace Pygma.UatTests.TestDb.Seed
             dbContext.SaveChanges();
         }
 
-        private void CreateUser(PygmaDbContext dbContext, int id, string email,  string firstname, string lastname, string role, bool active)
+        private static void CreateUser(PygmaDbContext dbContext, int id, string email,  string firstname, string lastname, string role, bool active)
         {
             dbContext.Users.Add(new User()
             {
