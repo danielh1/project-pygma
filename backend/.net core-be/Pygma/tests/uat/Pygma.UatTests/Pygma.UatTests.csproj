@@ -24,11 +24,11 @@
 
     <ItemGroup>
       <Folder Include="Models" />
-      <Folder Include="Tests\Api" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Pygma.App\Pygma.App.csproj" />
+      <ProjectReference Include="..\..\..\src\Pygma.Users\Pygma.Users.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pygma.Common.Constants;
 using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
@@ -30,18 +31,23 @@ namespace Pygma.Users.Api
         [HttpPost("registration")]
         public async Task<ActionResult> RegisterAsync([FromBody] RegisterAccountVm registerAccountVm)
         {
+            if (registerAccountVm == null)
+            {
+                return BadRequest();
+            }
+            
             var appUser = (await _usersRepository.ReadAsync(x => x.Email == registerAccountVm.Email)).FirstOrDefault();
 
             if (appUser?.Email != null && appUser.Email == registerAccountVm?.Email)
                 return Ok();
             
-            if(appUser?.Email != null && appUser.Email != registerAccountVm?.Email)
-                return new ForbidResult();
-
             var newUser = new User()
             {
+                FirstName = registerAccountVm.Firstname,
+                LastName = registerAccountVm.Lastname,
                 Email = registerAccountVm.Email,
                 Password = registerAccountVm.Password,
+                Role = Roles.Author,
                 Active = false,
                 CreatedAt = DateTime.Now
             };
@@ -53,24 +59,22 @@ namespace Pygma.Users.Api
         
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] LoginVm loginVm)
+        public async Task<ActionResult<string>> LoginAsync([FromBody] LoginVm loginVm)
         {
             IActionResult response;
             
-            var user = _usersRepository.LoginAsync(loginVm.Email, loginVm.Password);
+            var user = await _usersRepository.LoginAsync(loginVm.Email, loginVm.Password);
  
             if (user != null)
             {
                 var tokenString = _jwtTokenService.BuildToken(user.Id);
                 
-                response = Ok( new { token = tokenString });
+                return Ok( new { token = tokenString });
             }
             else
             {
-                response = Unauthorized();
+                return Unauthorized();
             }
- 
-            return response;
         }
     }
 }

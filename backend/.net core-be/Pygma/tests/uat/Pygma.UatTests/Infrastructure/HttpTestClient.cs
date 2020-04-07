@@ -11,6 +11,7 @@ namespace Pygma.UatTests.Infrastructure
     {
         public readonly TestWebApplicationFactory TestWebApplicationFactory;
     
+        public readonly HttpClient DefaultClient;
         public readonly HttpClient AdminClient;
         public readonly HttpClient AuthorClient;
     
