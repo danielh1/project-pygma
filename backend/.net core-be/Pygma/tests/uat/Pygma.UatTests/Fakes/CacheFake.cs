@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
-using Pygma.Data;
-
-namespace Pygma.UatTests.Fakes
+﻿namespace Pygma.UatTests.Fakes
 {
     public class CacheFake
     {

@@ -2,21 +2,20 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Pygma.Common.Constants;
 using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
-using Pygma.Users.Services;
 using Pygma.Users.ViewModels.Requests;
 using Pygma.Users.ViewModels.Responses;
 
 namespace Pygma.Users.Api
 {
     [Route("api/users")]
-    [Authorize]
+    [Authorize(Roles = Roles.Admin)]
     public class UsersController : CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
-
 
         public UsersController(IUsersRepository usersRepository,
             IMapper mapper)
@@ -25,10 +24,10 @@ namespace Pygma.Users.Api
             _mapper = mapper;
         }
 
-        [HttpGet("all")]
-        public async Task<ActionResult<UserListVm[]>> GetAll()
+        [HttpGet]
+        public async Task<ActionResult<UserListItemVm[]>> GetAll()
         {
-            return _mapper.Map<UserListVm[]>(await _usersRepository.ReadAllAsync());
+            return _mapper.Map<UserListItemVm[]>(await _usersRepository.ReadAllAsync());
         }
 
         [HttpGet("{userId:int:min(1)}")]

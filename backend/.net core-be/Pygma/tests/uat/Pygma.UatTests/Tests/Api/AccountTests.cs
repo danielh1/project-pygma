@@ -1,7 +1,14 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Pygma.Common.Constants;
 using Pygma.UatTests.Base;
+using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
-using Pygma.UatTests.TestDb.Seed;
+using Pygma.Users.ViewModels.Requests;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Api
@@ -18,54 +25,97 @@ namespace Pygma.UatTests.Tests.Api
         [Fact]
         public async Task RegisterAccount_ShouldSucceed()
         {
-            var actual = await _http
+            await _http
                 .DefaultClient
-                ;
-
-            actual.Results.Should().NotBeEmpty();
-            actual.Results.Length.Should().Be(1);
-            actual.Results.Single().LastName.Should().Be("CarpenterWithSalesPerson");
-            actual.Results.Single().Id.Should().Be(SeedConstants.CarpenterPartner);
+                .RegisterAsync(new RegisterAccountVm
+                {
+                    Firstname = "Firstname_test",
+                    Lastname = "Lastname_test",
+                    Email = "test_register@mymail.com",
+                    Password = "test"
+                }, HttpStatusCode.NoContent);
         }
-        
+
         [Fact]
         public async Task RegisterAccount_BadRequest()
         {
-            var actual = await _http
-                    .DefaultClient
-                ;
-
-            actual.Results.Should().NotBeEmpty();
-            actual.Results.Length.Should().Be(1);
-            actual.Results.Single().LastName.Should().Be("CarpenterWithSalesPerson");
-            actual.Results.Single().Id.Should().Be(SeedConstants.CarpenterPartner);
+            await _http
+                .DefaultClient
+                .RegisterAsync(null, HttpStatusCode.BadRequest);
         }
 
-        
         [Fact]
         public async Task Login_ShouldSucceed()
         {
             var actual = await _http
-                    .DefaultClient
-                ;
+                .DefaultClient
+                .LoginAsync(new LoginVm()
+                {
+                    Email = "admin@mymail.com",
+                    Password = "test"
+                });
 
-            actual.Results.Should().NotBeEmpty();
-            actual.Results.Length.Should().Be(1);
-            actual.Results.Single().LastName.Should().Be("CarpenterWithSalesPerson");
-            actual.Results.Single().Id.Should().Be(SeedConstants.CarpenterPartner);
+            actual.Token.Should().NotBeNullOrEmpty();
         }
-        
+
         [Fact]
         public async Task Login_Unauthorized()
         {
             var actual = await _http
-                    .DefaultClient
-                ;
+                .DefaultClient
+                .LoginAsync(new LoginVm()
+                {
+                    Email = "admin@mymail.com",
+                    Password = "wrongPass"
+                }, HttpStatusCode.Unauthorized);
 
-            actual.Results.Should().NotBeEmpty();
-            actual.Results.Length.Should().Be(1);
-            actual.Results.Single().LastName.Should().Be("CarpenterWithSalesPerson");
-            actual.Results.Single().Id.Should().Be(SeedConstants.CarpenterPartner);
+            actual.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task LoginAdmin_ShouldSucceed()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            
+            var user = new LoginVm()
+                {
+                    Email = "admin@mymail.com",
+                    Password = "test"
+                };
+            
+            var actual = await _http
+                .DefaultClient
+                .LoginAsync(user);
+            
+            var token = tokenHandler.ReadJwtToken(actual.Token);
+            
+            var role = token.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+            
+            role.Should().NotBeNullOrEmpty()
+                .And.Be(Roles.Admin);
+        }
+
+        [Fact]
+        public async Task LoginAuthor_ShouldSucceed()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            
+            var user = new LoginVm()
+            {
+                Email = "author@mymail.com",
+                Password = "test"
+            };
+            
+            var actual = await _http
+                .DefaultClient
+                .LoginAsync(user);
+            
+            var token = tokenHandler.ReadJwtToken(actual.Token);
+            
+            var role = token.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+            
+            role.Should().NotBeNullOrEmpty()
+                .And.Be(Roles.Author);
         }
     }
 }

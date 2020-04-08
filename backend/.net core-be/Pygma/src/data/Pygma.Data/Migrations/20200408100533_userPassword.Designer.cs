@@ -3,13 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Pygma.Data;
 
 namespace Pygma.Data.Migrations
 {
     [DbContext(typeof(PygmaDbContext))]
-    partial class PygmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200408100533_userPassword")]
+    partial class userPassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,6 +8,7 @@
     <ItemGroup>
       <PackageReference Include="Autofac" Version="5.1.2" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
         <PrivateAssets>all</PrivateAssets>
@@ -25,6 +26,7 @@
       <ProjectReference Include="..\src\Pygma.Admin\Pygma.Admin.csproj" />
       <ProjectReference Include="..\src\Pygma.Blog\Pygma.Blog.csproj" />
       <ProjectReference Include="..\src\Pygma.Common\Pygma.Common.csproj" />
+      <ProjectReference Include="..\src\Pygma.Users\Pygma.Users.csproj" />
       <ProjectReference Include="..\src\services\Pygma.Services.Bootstrapper\Pygma.Services.Bootstrapper.csproj" />
       <ProjectReference Include="..\src\services\Pygma.Services.Users\Pygma.Services.Users.csproj" />
     </ItemGroup>

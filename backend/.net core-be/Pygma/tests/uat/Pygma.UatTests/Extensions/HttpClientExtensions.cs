@@ -41,9 +41,9 @@ namespace Pygma.UatTests.Extensions
             
             var responseAsString = await response.Content.ReadAsStringAsync();
             
-            return expectedStatusCode == HttpStatusCode.NoContent 
-                ? default 
-                : new JsonMessageParser<TResponse>().Deserialize(responseAsString);
+            return response.StatusCode == HttpStatusCode.OK
+                ? new JsonMessageParser<TResponse>().Deserialize(responseAsString)
+                : default;
         }
 
         public static async Task<TResponse> DoPutAsync<TPayload, TResponse>(this HttpClient client, string url,

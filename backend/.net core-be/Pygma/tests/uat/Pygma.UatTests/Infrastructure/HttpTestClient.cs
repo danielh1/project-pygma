@@ -1,9 +1,4 @@
 ﻿using System.Net.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using Pygma.UatTests.Extensions;
-using Pygma.UatTests.Stubs;
 
 namespace Pygma.UatTests.Infrastructure
 {
@@ -18,8 +13,17 @@ namespace Pygma.UatTests.Infrastructure
         public HttpTestClient()
         {
             TestWebApplicationFactory = new TestWebApplicationFactory();
+            DefaultClient = GetDefaultClient();
             AdminClient = GetAdminClient();
             AuthorClient = GetAuthorClient();
+        }
+        
+        private HttpClient GetDefaultClient()
+        {
+            var client = TestWebApplicationFactory
+                .CreateClient();
+    
+            return client;
         }
     
         private HttpClient GetAdminClient()

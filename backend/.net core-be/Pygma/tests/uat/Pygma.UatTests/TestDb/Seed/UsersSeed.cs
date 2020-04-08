@@ -32,7 +32,7 @@ namespace Pygma.UatTests.TestDb.Seed
                 Password = "test",
                 Role = role,
                 Active = active,
-                Email = $"{email}@gmail.com"
+                Email = $"{email}@mymail.com"
             });
         }
     }

@@ -1,9 +1,4 @@
-﻿using System.Security.Claims;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Http;
-using Pygma.Common.Constants;
-
-namespace Pygma.UatTests.Stubs
+﻿namespace Pygma.UatTests.Stubs
 {
     // public class AdminHttpContextStub: IHttpContextAccessor
     // {
@@ -22,7 +17,7 @@ namespace Pygma.UatTests.Stubs
     //         
     //         // var claimsIdentity = new ClaimsIdentity(new List<Claim>(){ claim });
     //         
-    //         identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "admin@gmail.com"));
+    //         identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "admin@mymail.com"));
     //         identity.AddClaim(new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", Roles.Admin));
     //         
     //         var email = contextUser.Identity.GetEmail();

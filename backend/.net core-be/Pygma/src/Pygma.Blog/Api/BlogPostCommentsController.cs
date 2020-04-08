@@ -26,7 +26,7 @@ namespace Pygma.Blog.Api
         }
         
         [HttpPost]
-        public async Task<ActionResult> CreateBlogPostCommentAsync(int id,
+        public async Task<ActionResult<int>> CreateBlogPostCommentAsync(int id,
             [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
         {
             var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
@@ -34,13 +34,12 @@ namespace Pygma.Blog.Api
             var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
             blogPostComment.BlogPostId = blogPost.Id;
             
-            await _blogPostCommentsRepository.CreateAsync(blogPostComment);
+            var commentId = await _blogPostCommentsRepository.CreateAsync(blogPostComment);
             
-            return CreatedAtRoute(nameof(GetBlogPostCommentAsync),
-                new {blogPostId = blogPost.Id, itemId = blogPostComment.Id}, null);
+            return commentId;
         }
         
-        [HttpGet("{commentId:int:min(1)}", Name = nameof(GetBlogPostCommentAsync))]
+        [HttpGet("{commentId:int:min(1)}")]
         public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int id, int commentId)
         {
             var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);

@@ -43,30 +43,29 @@ namespace Pygma.UatTests
 
             services.AddDbContext<PygmaDbContext>(options =>
             {
-                options.UseSqlServer("Server=.;Database={Pygma_Test;Integrated Security=SSPI");
+                options.UseSqlServer("Server=.;Database=Pygma_Test;Integrated Security=SSPI");
             });
 
             // Build the service provider.
             var sp = services.BuildServiceProvider();
 
             // Create a scope to obtain a reference to the database contexts
-            using (var scope = sp.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var appDb = scopedServices.GetRequiredService<PygmaDbContext>();
+            using var scope = sp.CreateScope();
+            
+            var scopedServices = scope.ServiceProvider;
+            var appDb = scopedServices.GetRequiredService<PygmaDbContext>();
 
-                try
-                {
-                    appDb.Database.EnsureDeleted();
-                    appDb.Database.EnsureCreated();
+            try
+            {
+                appDb.Database.EnsureDeleted();
+                appDb.Database.EnsureCreated();
                     
-                    // Seed the database with some specific test data.
-                    SeedData.PopulateTestData(appDb);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
+                // Seed the database with some specific test data.
+                SeedData.PopulateTestData(appDb);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
 
             #endregion

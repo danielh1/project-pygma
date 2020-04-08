@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Pygma.Data.Abstractions.Repositories;
@@ -12,7 +10,7 @@ namespace Pygma.Data.Repositories
 {
     public class UsersRepository : RepositoryBase<User>, IUsersRepository
     {
-        public UsersRepository(DbContext context) : base(context)
+        public UsersRepository(PygmaDbContext context) : base(context)
         {
         }
         

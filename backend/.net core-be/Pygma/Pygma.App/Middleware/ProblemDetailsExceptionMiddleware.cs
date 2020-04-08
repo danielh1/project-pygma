@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Pygma.App.Middleware
 {
@@ -41,7 +40,7 @@ namespace Pygma.App.Middleware
             {
                 problemDetails.Title = "The request is invalid";
                 problemDetails.Status = badHttpRequestException.StatusCode;
-                problemDetails.Instance = $"urn:CHANGEME:bad-request:{Guid.NewGuid()}";
+                problemDetails.Instance = $"urn:pygma:bad-request:{Guid.NewGuid()}";
                 
                 if (env.IsDevelopment())
                 {

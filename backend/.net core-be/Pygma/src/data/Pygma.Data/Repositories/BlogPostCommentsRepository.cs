@@ -1,4 +1,3 @@
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +9,7 @@ namespace Pygma.Data.Repositories
 {
     public class BlogPostCommentsRepository : RepositoryBase<BlogPostComment>, IBlogPostCommentsRepository
     {
-        public BlogPostCommentsRepository(DbContext context) : base(context)
+        public BlogPostCommentsRepository(PygmaDbContext context) : base(context)
         {
         }
 

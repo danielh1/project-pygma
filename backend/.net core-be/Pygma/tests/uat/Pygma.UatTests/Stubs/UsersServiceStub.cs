@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using Pygma.Common.Constants;
-using Pygma.Data.Domain.Entities;
-using Pygma.UatTests.TestDb.Seed;
-
-namespace Pygma.UatTests.Stubs
+﻿namespace Pygma.UatTests.Stubs
 {
     // public class AdminsServiceStub: IUsersService
     // {
@@ -15,7 +9,7 @@ namespace Pygma.UatTests.Stubs
     //             Id = SeedConstants.AdminUser,
     //             FirstName = "-",
     //             LastName = "-",
-    //             Email = "a@gmail.com",
+    //             Email = "a@mymail.com",
     //         };
     //     }
     //
@@ -39,7 +33,7 @@ namespace Pygma.UatTests.Stubs
     //             Id = SeedConstants.AuthorUser,
     //             FirstName = "-",
     //             LastName = "-",
-    //             Email = "b@gmail.com",
+    //             Email = "b@mymail.com",
     //         };
     //     }
     //

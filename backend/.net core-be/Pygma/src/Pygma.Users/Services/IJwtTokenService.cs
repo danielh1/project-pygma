@@ -1,7 +1,9 @@
+using Pygma.Data.Domain.Entities;
+
 namespace Pygma.Users.Services
 {
     public interface IJwtTokenService
     {
-        string BuildToken(int userId);
+        string BuildToken(User user);
     }
 }

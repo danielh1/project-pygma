@@ -4,11 +4,11 @@ namespace Pygma.UatTests.Infrastructure
 {
     public class JsonMessageParser<T>
     {
-        private readonly JsonSerializerOptions options;
+        private readonly JsonSerializerOptions _options;
 
         public JsonMessageParser()
         {
-            options = new JsonSerializerOptions
+            _options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true,
@@ -16,8 +16,8 @@ namespace Pygma.UatTests.Infrastructure
             };
         }
 
-        public string Serialize(T content) => JsonSerializer.Serialize(content, options);
+        public string Serialize(T content) => JsonSerializer.Serialize(content, _options);
 
-        public T Deserialize(string responseAsString) => JsonSerializer.Deserialize<T>(responseAsString, options);
+        public T Deserialize(string responseAsString) => JsonSerializer.Deserialize<T>(responseAsString, _options);
     }
 }

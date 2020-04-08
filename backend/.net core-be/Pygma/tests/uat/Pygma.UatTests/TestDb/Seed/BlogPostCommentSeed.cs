@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Pygma.Data;
 using Pygma.Data.Domain.Entities;
 using Pygma.UatTests.Extensions;

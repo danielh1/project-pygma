@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Http;
-
-namespace Pygma.UatTests.Stubs
+﻿namespace Pygma.UatTests.Stubs
 {
     // public class AuthorHttpContextStub: IHttpContextAccessor
     // {
@@ -17,7 +13,7 @@ namespace Pygma.UatTests.Stubs
     //     private static DefaultHttpContext GetStub()
     //     {
     //         var identity = new GenericIdentity("some name", "test");
-    //         identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "Carpenter@gmail.com"));
+    //         identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "Carpenter@mymail.com"));
     //         var contextUser = new ClaimsPrincipal(identity); //add claims as needed
     //         
     //         var email = contextUser.Identity.GetEmail();

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Pygma.Users.ViewModels.Requests
+﻿namespace Pygma.Users.ViewModels.Requests
 {
     public class RegisterAccountVm
     {

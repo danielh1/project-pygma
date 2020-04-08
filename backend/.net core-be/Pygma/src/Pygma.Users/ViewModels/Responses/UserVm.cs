@@ -16,13 +16,7 @@ namespace Pygma.Users.ViewModels.Responses
         public string LastName { get; set; }
 
         public string Email { get; set; }
-        
-        public string ContactPhone { get; set; }
-        
-        public string ContactEmail { get; set; }
 
         public bool Active { get; set; }
-
-        public IBaseVm Partner { get; set; }
     }
 }

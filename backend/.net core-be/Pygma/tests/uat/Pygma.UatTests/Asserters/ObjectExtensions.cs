@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Pygma.UatTests.Asserters
+﻿namespace Pygma.UatTests.Asserters
 {
     public static class ObjectExtensions
     {

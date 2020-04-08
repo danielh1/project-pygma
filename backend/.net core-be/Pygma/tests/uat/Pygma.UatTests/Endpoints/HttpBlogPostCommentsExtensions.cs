@@ -1,12 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNetCore.Mvc;
-using Pygma.Common.Models.Search;
-using Pygma.UatTests.Extensions;
-
-namespace Pygma.UatTests.Endpoints
+﻿namespace Pygma.UatTests.Endpoints
 {
     // public static class HttpBlogPostCommentsExtensions
     // {
