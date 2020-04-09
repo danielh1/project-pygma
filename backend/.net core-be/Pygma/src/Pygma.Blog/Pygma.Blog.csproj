@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\data\Pygma.Data\Pygma.Data.csproj" />
     <ProjectReference Include="..\Pygma.Common\Pygma.Common.csproj" />
+    <ProjectReference Include="..\services\Pygma.Services.Users\Pygma.Services.Users.csproj" />
   </ItemGroup>
 
   <ItemGroup>

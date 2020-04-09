@@ -9,8 +9,10 @@ using Pygma.Common.Constants;
 using Pygma.Common.Models.Search;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
+using Pygma.Data.Domain.Enums;
 using Pygma.Data.SearchCriteria;
 using Pygma.Data.SearchSpecifications;
+using Pygma.Services.Users;
 
 namespace Pygma.Blog.Api
 {
@@ -18,19 +20,29 @@ namespace Pygma.Blog.Api
     public class BlogPostsController: BlogControllerBase
     {
         private readonly IBlogPostsRepository _blogPostsRepository;
+        private readonly IUsersService _usersService;
         private readonly IMapper _mapper;
 
         public BlogPostsController(IBlogPostsRepository blogPostsRepository,
+            IUsersService usersService,
             IMapper mapper)
         {
             _blogPostsRepository = blogPostsRepository;
+            _usersService = usersService;
             _mapper = mapper;
         }
         
         #region CRUD
         [HttpGet]
+        [AllowAnonymous]
         public async Task<SearchResultsVm<BlogPostSrVm[]>> SearchAsync(BlogPostSc sc)
         {
+            //Visitors can only view published blog posts
+            if (_usersService.GetUser() == null)
+            {
+                sc.Status = EnBlogPostStatus.Published;
+            }
+            
             var specification = new BlogPostSpecification();
             specification.SetCriteria(sc);
 
@@ -48,6 +60,7 @@ namespace Pygma.Blog.Api
         }
 
         [HttpGet("{id:int:min(1)}", Name = nameof(GetBlogPostAsync))]
+        [AllowAnonymous]
         public async Task<ActionResult<BlogPostVm>> GetBlogPostAsync(int id)
         {
             var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
@@ -57,11 +70,18 @@ namespace Pygma.Blog.Api
                 return NotFound();
             }
              
+            //Visitors can only view published blog posts
+            if (_usersService.GetUser() == null 
+                && blogPost.Status != EnBlogPostStatus.Published)
+            {
+                return new ForbidResult();
+            }
+            
             return _mapper.Map<BlogPostVm>(blogPost);
         }
         
         [HttpPut("{id:int:min(1)}")]
-        [Authorize(Roles = Roles.Author)]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Author)]
         public async Task<ActionResult> UpdateBlogPostAsync(int id, UpdateBlogPostVm updateBlogPostVm)
         {
             var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
@@ -77,7 +97,7 @@ namespace Pygma.Blog.Api
         }
         
         [HttpPost]
-        [Authorize(Roles = Roles.Author)]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Author)]
         public async Task<ActionResult<int>> CreateBlogPostAsync([FromBody] CreateBlogPostVm createBlogPostVm)
         {
             var blogPost = new BlogPost();
@@ -86,18 +106,18 @@ namespace Pygma.Blog.Api
             return Ok(blogPost.Id);
         }
         
-        [HttpDelete("{blogPostId:int:min(1)}")]
-        [Authorize(Roles = Roles.Author)]
-        public async Task<ActionResult> DeleteBlogPostAsync(int blogPostId)
+        [HttpDelete("{id:int:min(1)}")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<ActionResult> DeleteBlogPostAsync(int id)
         {
-            var blogPost = await _blogPostsRepository.ReadByIdAsync(blogPostId);
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
 
             if (blogPost is null)
             {
                 return NotFound();
             }
 
-            await _blogPostsRepository.DeleteAsync(blogPostId);
+            await _blogPostsRepository.DeleteAsync(blogPost);
 
             return NoContent();
         }

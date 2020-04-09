@@ -28,6 +28,7 @@ namespace Pygma.UatTests
 
         protected void ConfigureTestServices(IServiceCollection services)
         {
+            //Usefull code
             services.AddTransient<IAuthorizationHandler, DisableAuthorizationHandler<IAuthorizationRequirement>>();
 
             #region Db

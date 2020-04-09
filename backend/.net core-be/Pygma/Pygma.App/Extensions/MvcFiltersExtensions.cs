@@ -7,8 +7,8 @@ namespace Pygma.App.Extensions
     {
         public static void AddCoreFilters(this MvcOptions options)
         {
-            options.Filters.Add(new UserFilterAttribute());
-            options.Filters.Add(new ValidateModelStateFilterAttribute());
+            options.Filters.Add(new UserFilter());
+            options.Filters.Add(new ValidateModelStateFilter());
         }
     }
 }

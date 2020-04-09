@@ -23,9 +23,9 @@ namespace Pygma.Data.Repositories.Base
             DbTable = _dbContext.Set<TEntity>();
         }
 
-        public async Task<int> CreateAsync(TEntity entity)
+        public async Task<int> CreateAsync(TEntity user)
         {
-            DbTable.Add(entity);
+            DbTable.Add(user);
             return await SaveChangesAsync();
         }
 
@@ -40,11 +40,11 @@ namespace Pygma.Data.Repositories.Base
         public Task<List<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> where)
             => DbTable.Where(where).ToListAsync();
         
-        public async Task<int> UpdateAsync(TEntity entity)
+        public async Task<int> UpdateAsync(TEntity user)
         {
-            entity.UpdatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
 
-            DbTable.Update(entity);
+            DbTable.Update(user);
             return await SaveChangesAsync();
         }
 
@@ -67,9 +67,9 @@ namespace Pygma.Data.Repositories.Base
             return await SaveChangesAsync();
         }
 
-        public async Task<int> DeleteAsync(TEntity entity)
+        public async Task<int> DeleteAsync(TEntity user)
         {
-            _dbContext.Entry(entity).State = EntityState.Deleted;
+            _dbContext.Entry(user).State = EntityState.Deleted;
             return await SaveChangesAsync();
         }
         

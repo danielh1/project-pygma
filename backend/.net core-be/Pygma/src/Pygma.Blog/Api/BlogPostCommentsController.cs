@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Blog.Api.Base;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
@@ -26,6 +27,7 @@ namespace Pygma.Blog.Api
         }
         
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<int>> CreateBlogPostCommentAsync(int id,
             [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
         {
@@ -40,6 +42,7 @@ namespace Pygma.Blog.Api
         }
         
         [HttpGet("{commentId:int:min(1)}")]
+        [AllowAnonymous]
         public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int id, int commentId)
         {
             var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
@@ -48,5 +51,7 @@ namespace Pygma.Blog.Api
                 ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {commentId} not found") 
                 : _mapper.Map<BlogPostCommentVm>(blogPostComment);
         }
+        
+        // Delete BlogPost common
     }
 }

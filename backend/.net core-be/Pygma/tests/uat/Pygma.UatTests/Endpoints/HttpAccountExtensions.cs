@@ -14,7 +14,7 @@ namespace Pygma.UatTests.Endpoints
 
         public static async Task RegisterAsync(this HttpClient client,
             RegisterAccountVm registerAccountVm,
-            HttpStatusCode expectedStatusCode = HttpStatusCode.OK)
+            HttpStatusCode expectedStatusCode = HttpStatusCode.NoContent)
         {
             await client.DoPostAsync<RegisterAccountVm, ActionResult>($"{url}/registration", registerAccountVm,
                 expectedStatusCode);

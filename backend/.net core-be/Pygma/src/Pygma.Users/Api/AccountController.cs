@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Common.Constants;
+using Pygma.Common.Filters;
 using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain;
@@ -16,6 +17,7 @@ namespace Pygma.Users.Api
 {
     [Route("api/account")]
     [AllowAnonymous]
+    [SkipInactiveUserFilter]
     public class AccountController : CommonControllerBase
     {
         private readonly IUsersRepository _usersRepository;
@@ -61,7 +63,7 @@ namespace Pygma.Users.Api
         [HttpPost("login")]
         public async Task<ActionResult<Jwt>> LoginAsync([FromBody] LoginVm loginVm)
         {
-            var user = await _usersRepository.LoginAsync(loginVm.Email, Encryption.Encrypt(loginVm.Password));
+            var user = await _usersRepository.ReadByEmailAndPasswordAsync(loginVm.Email, Encryption.Encrypt(loginVm.Password));
 
             if (user == null)
             {

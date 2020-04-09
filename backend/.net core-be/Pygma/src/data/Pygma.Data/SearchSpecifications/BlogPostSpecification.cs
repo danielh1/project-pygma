@@ -33,7 +33,7 @@ namespace Pygma.Data.SearchSpecifications
             
             if (sc.Status.HasValue)
             {
-                Criteria.Add(x => x.PublishedAt <= sc.PublishedAtTo);
+                Criteria.Add(x => x.Status == sc.Status);
             }
         }
     }

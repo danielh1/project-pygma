@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Pygma.App.Autofac.Modules;
 using Pygma.App.Extensions;
+using Pygma.Services.Bootstrapper;
+using Pygma.Services.Users;
 
 namespace Pygma.App
 {
@@ -72,8 +74,8 @@ namespace Pygma.App
                 app.UseHsts();
             }
 
-            //var bootstrapCache = app.ApplicationServices.GetService<IBootstrapCacheService>();
-            //bootstrapCache.Invalidate();
+            var bootstrapCache = app.ApplicationServices.GetService<IBootstrapCacheService>();
+            bootstrapCache.Invalidate();
 
             app.UseHttpsRedirection();
             //app.UseAuthentication();
@@ -96,14 +98,14 @@ namespace Pygma.App
             builder.RegisterModule(new CustomMapperModule(runtimeAssemblies));
             builder.RegisterModule(new FluentValidationModule(runtimeAssemblies));
 
-            // builder.RegisterType<BootstrapCacheService>()
-            //     .As<IBootstrapCacheService>()
-            //     .SingleInstance();
-            //
-            // builder.RegisterType<UsersService>()
-            //     .As<IUsersService>()
-            //     .InstancePerLifetimeScope();
-            //
+            builder.RegisterType<BootstrapCacheService>()
+                .As<IBootstrapCacheService>()
+                .SingleInstance();
+            
+            builder.RegisterType<UsersService>()
+                .As<IUsersService>()
+                .InstancePerLifetimeScope();
+            
             // builder.RegisterType<OrderViewAccessServiceFilter>()
             //     .InstancePerLifetimeScope();
             // builder.RegisterType<OrderEditAccessServiceFilter>()

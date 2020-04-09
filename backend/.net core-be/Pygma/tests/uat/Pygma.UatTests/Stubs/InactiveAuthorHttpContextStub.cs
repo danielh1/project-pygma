@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Pygma.Common.Constants;
+using Pygma.Services.Users.Extensions;
 
 namespace Pygma.UatTests.Stubs
 {
-    public class AdminHttpContextStub: IHttpContextAccessor
+    public class InactiveAuthorHttpContextStub: IHttpContextAccessor
     {
         public HttpContext HttpContext
         {
@@ -18,10 +18,10 @@ namespace Pygma.UatTests.Stubs
         {
             var identity = new GenericIdentity("some name", "test");
             
-            identity.AddClaim(new Claim(ClaimTypes.Email, "admin@mymail.com"));
-            identity.AddClaim(new Claim(ClaimTypes.Role, Roles.Admin));
-            var contextUser = new ClaimsPrincipal(identity);
-            
+            identity.AddClaim(new Claim(ClaimTypes.Email, "inactive@mymail.com"));
+            identity.AddClaim(new Claim(ClaimTypes.Role, Roles.Author));
+            var contextUser = new ClaimsPrincipal(identity); //add claims as needed
+
             return new DefaultHttpContext() {
                 User = contextUser
             };

@@ -2,7 +2,7 @@
 
 namespace Pygma.App.Filters
 {
-    public class ValidateModelStateFilterAttribute : ActionFilterAttribute
+    public class ValidateModelStateFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

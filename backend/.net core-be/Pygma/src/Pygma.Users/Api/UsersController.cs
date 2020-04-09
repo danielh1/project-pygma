@@ -59,7 +59,13 @@ namespace Pygma.Users.Api
             if (user == null)
                 return NotFound();
 
-            await _usersRepository.DeleteAsync(userId);
+            // You can not delete an Admin
+            if (user.Role == Roles.Admin)
+            {
+                return new BadRequestResult();
+            }
+
+            await _usersRepository.DeleteAsync(user);
 
             return NoContent();
         }
