@@ -9,7 +9,7 @@ namespace Pygma.Data.SearchSpecifications
     {
         public void SetCriteria(BlogPostSc sc)
         {
-            if (string.IsNullOrWhiteSpace(sc.Title))
+            if (!string.IsNullOrWhiteSpace(sc.Title))
             {
                 Criteria.Add(x => x.Title.Contains(sc.Title));
             }

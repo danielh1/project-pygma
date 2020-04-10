@@ -2,8 +2,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Pygma.Data.Domain.Models;
 using Pygma.UatTests.Extensions;
+using Pygma.Users.Models;
 using Pygma.Users.ViewModels.Requests;
 
 namespace Pygma.UatTests.Endpoints

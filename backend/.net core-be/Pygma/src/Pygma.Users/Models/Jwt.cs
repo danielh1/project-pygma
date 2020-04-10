@@ -1,4 +1,4 @@
-namespace Pygma.Data.Domain.Models
+namespace Pygma.Users.Models
 {
     public class Jwt
     {

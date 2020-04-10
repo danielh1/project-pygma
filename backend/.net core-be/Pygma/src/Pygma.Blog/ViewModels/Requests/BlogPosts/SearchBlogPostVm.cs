@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Common.Models.Base;
+using Pygma.Data.Domain.Enums;
 
 namespace Pygma.Blog.ViewModels.Requests.BlogPosts
 {
@@ -11,10 +12,13 @@ namespace Pygma.Blog.ViewModels.Requests.BlogPosts
         PublishedAtTo
     }
 
-    public class SearchBlogPostVm : SearchFiltersBase<EnBlogPostOrderField>
+    public class SearchBlogPostVm : SearchBase<EnBlogPostOrderField>
     {
         [FromQuery(Name = "title")]
         public string Title { get; set; }
+        
+        [FromQuery(Name = "status")]
+        public EnBlogPostStatus? Status { get; set; }
         
         [FromQuery(Name = "publishedAtFrom")]
         public DateTime? PublishedAtFrom { get; set; }

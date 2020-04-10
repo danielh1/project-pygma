@@ -9,7 +9,7 @@ using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain;
 using Pygma.Data.Domain.Entities;
-using Pygma.Data.Domain.Models;
+using Pygma.Users.Models;
 using Pygma.Users.Services;
 using Pygma.Users.ViewModels.Requests;
 

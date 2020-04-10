@@ -64,7 +64,7 @@ namespace Pygma.Data.SearchSpecifications.Base
         {
             ApplyPaging(criteria.Skip, criteria.Take);
 
-            if (criteria.EnOrderDirection == EnOrderDirection.Asc)
+            if (criteria.OrderByByDirection == EnOrderByDirection.Asc)
             {
                 ApplyOrderBy(criteria.OrderBy);
             }
