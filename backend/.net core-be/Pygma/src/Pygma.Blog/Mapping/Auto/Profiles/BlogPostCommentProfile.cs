@@ -1,6 +1,6 @@
 using AutoMapper;
-using Pygma.Blog.ViewModels.Requests.BlogPostComments;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
+using Pygma.Blog.ViewModels.Requests.Comments;
 using Pygma.Blog.ViewModels.Responses.Comments;
 using Pygma.Data.Domain.Entities;
 

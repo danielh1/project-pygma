@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using FluentAssertions;
-using Pygma.Blog.ViewModels.Requests.BlogPostComments;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
+using Pygma.Blog.ViewModels.Requests.Comments;
 using Pygma.Data.Domain.Enums;
 using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;

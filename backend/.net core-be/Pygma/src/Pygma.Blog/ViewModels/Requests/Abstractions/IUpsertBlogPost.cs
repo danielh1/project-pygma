@@ -1,10 +1,8 @@
-using System;
-using Pygma.Blog.ViewModels.Requests.Abstractions;
 using Pygma.Data.Domain.Enums;
 
-namespace Pygma.Blog.ViewModels.Requests.BlogPosts
+namespace Pygma.Blog.ViewModels.Requests.Abstractions
 {
-    public class CreateBlogPostVm: IUpsertBlogPost
+    public interface IUpsertBlogPost
     {
         public string Title { get; set; }
         

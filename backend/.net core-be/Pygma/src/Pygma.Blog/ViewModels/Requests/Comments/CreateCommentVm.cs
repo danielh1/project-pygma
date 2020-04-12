@@ -1,4 +1,4 @@
-namespace Pygma.Blog.ViewModels.Requests.BlogPostComments
+namespace Pygma.Blog.ViewModels.Requests.Comments
 {
     public class CreateCommentVm
     {

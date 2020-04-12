@@ -1,15 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Pygma.Data.Domain.Entities.Base;
-using Pygma.Data.Domain.Enums;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pygma.Data.Domain.Entities
 {
-    public class Log : EntityBase
+    public class Log
     {
-        [Required]
+        [Key]
+        public int Id { get; set; }
         public string Message { get; set; }
-
-        [Required]
-        public IncidentTypeEnum IncidentType { get; set; }
+        public string MessageTemplate { get; set; }
+        public string Level { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public string Exception { get; set; }
+        public string Properties { get; set; }
     }
 }

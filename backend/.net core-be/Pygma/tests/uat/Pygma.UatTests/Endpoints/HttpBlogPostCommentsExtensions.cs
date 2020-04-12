@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Pygma.Blog.ViewModels.Requests.BlogPostComments;
+using Pygma.Blog.ViewModels.Requests.Comments;
 using Pygma.Blog.ViewModels.Responses.Comments;
 using Pygma.UatTests.Extensions;
 
