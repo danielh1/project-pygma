@@ -3,55 +3,72 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.Blog.Api.Base;
+using Pygma.Blog.ViewModels.Requests.BlogPostComments;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
 using Pygma.Blog.ViewModels.Responses.BlogPosts;
+using Pygma.Blog.ViewModels.Responses.Comments;
+using Pygma.Common.Filters;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
+using Pygma.Data.Domain.Enums;
 
 namespace Pygma.Blog.Api
 {
     [Route("api/blog-posts/{id:int:min(1)}/comments")]
+    [AllowAnonymous]
+    [SkipInactiveUserFilter]
     public class BlogPostCommentsController: BlogControllerBase
     {
         private readonly IBlogPostCommentsRepository _blogPostCommentsRepository;
         private readonly IBlogPostsRepository _blogPostsRepository;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
         public BlogPostCommentsController(IBlogPostCommentsRepository blogPostCommentsRepository,
             IBlogPostsRepository blogPostsRepository,
-            Mapper mapper)
+            IMapper mapper)
         {
             _blogPostCommentsRepository = blogPostCommentsRepository;
             _blogPostsRepository = blogPostsRepository;
             _mapper = mapper;
         }
-        
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult<int>> CreateBlogPostCommentAsync(int id,
-            [FromBody] CreateBlogPostCommentVm createBlogPostCommentVm)
+
+        [HttpGet("{commentId:int:min(1)}")]
+        public async Task<ActionResult<CommentVm>> GetBlogPostCommentAsync(int id, int commentId)
         {
             var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
 
-            var blogPostComment = _mapper.Map<BlogPostComment>(createBlogPostCommentVm);
-            blogPostComment.BlogPostId = blogPost.Id;
+            if (blogPost.Status != EnBlogPostStatus.Published)
+            {
+                return BadRequest();
+            }
             
-            var commentId = await _blogPostCommentsRepository.CreateAsync(blogPostComment);
-            
-            return commentId;
-        }
-        
-        [HttpGet("{commentId:int:min(1)}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<BlogPostCommentVm>> GetBlogPostCommentAsync(int id, int commentId)
-        {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
+            var comment = await _blogPostCommentsRepository.ReadByIdAsync(commentId);
 
-            return blogPostComment == null 
-                ? (ActionResult<BlogPostCommentVm>) NotFound($"Blog post comment {commentId} not found") 
-                : _mapper.Map<BlogPostCommentVm>(blogPostComment);
+            if (comment is null)
+            {
+                return NotFound();
+            }
+            
+            return _mapper.Map<CommentVm>(comment);
         }
         
-        // Delete BlogPost common
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateBlogPostCommentAsync(int id,
+            [FromBody] CreateCommentVm createCommentVm)
+        {
+            var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
+
+            if (blogPost.Status != EnBlogPostStatus.Published)
+            {
+                return BadRequest();
+            }
+                
+            var comment = _mapper.Map<Comment>(createCommentVm);
+            comment.BlogPostId = blogPost.Id;
+            
+            await _blogPostCommentsRepository.CreateAsync(comment);
+            
+            return comment.Id;
+        }
     }
 }

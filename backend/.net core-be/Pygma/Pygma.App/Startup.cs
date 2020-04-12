@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Pygma.App.Autofac.Modules;
 using Pygma.App.Extensions;
+using Pygma.App.Middleware;
 using Pygma.Services.Bootstrapper;
 using Pygma.Services.Users;
 
@@ -78,9 +79,9 @@ namespace Pygma.App
             bootstrapCache.Invalidate();
 
             app.UseHttpsRedirection();
-            //app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseMiddleware(typeof(ProblemDetailsExceptionMiddleware));
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 

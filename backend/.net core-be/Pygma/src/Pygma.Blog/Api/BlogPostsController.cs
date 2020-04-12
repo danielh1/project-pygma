@@ -54,7 +54,7 @@ namespace Pygma.Blog.Api
         [SkipInactiveUserFilter]
         public async Task<ActionResult<BlogPostVm>> GetBlogPostAsync(int id)
         {
-            var blogPost = await _blogPostsRepository.ReadByIdAsync(id);
+            var blogPost = await _blogPostsRepository.ReadByIdWithCommentsAsync(id);
 
             if (blogPost is null)
             {

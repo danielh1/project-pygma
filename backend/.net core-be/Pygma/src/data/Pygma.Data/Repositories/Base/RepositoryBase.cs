@@ -63,7 +63,13 @@ namespace Pygma.Data.Repositories.Base
 
         public async Task<int> DeleteAsync(int id)
         {
-            _dbContext.Entry(new TEntity() { Id = id }).State = EntityState.Deleted;
+            var entity = DbTable.FirstOrDefault(x => x.Id == id);
+
+            if (entity != null)
+            {
+                DbTable.Remove(entity);    
+            }
+            
             return await SaveChangesAsync();
         }
 

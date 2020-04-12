@@ -1,5 +1,7 @@
 using AutoMapper;
+using Pygma.Blog.ViewModels.Requests.BlogPostComments;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
+using Pygma.Blog.ViewModels.Responses.Comments;
 using Pygma.Data.Domain.Entities;
 
 namespace Pygma.Blog.Mapping.Auto.Profiles
@@ -8,7 +10,9 @@ namespace Pygma.Blog.Mapping.Auto.Profiles
     {
         public BlogPostCommentProfile()
         {
-            CreateMap<CreateBlogPostCommentVm, BlogPostComment>(MemberList.Source);
+            CreateMap<Comment, CommentVm>(MemberList.Destination);
+            
+            CreateMap<CreateCommentVm, Comment>(MemberList.Source);
         }
     }
 }

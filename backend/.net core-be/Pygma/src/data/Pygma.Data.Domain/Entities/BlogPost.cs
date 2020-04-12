@@ -26,6 +26,6 @@ namespace Pygma.Data.Domain.Entities
         [ForeignKey(nameof(AuthorId))]
         public User Author { get; set; }
 
-        public List<BlogPostComment> BlogPostComments { get; set; }
+        public List<Comment> BlogPostComments { get; set; }
     }
 }

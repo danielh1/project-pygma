@@ -24,11 +24,12 @@ namespace Pygma.UatTests.Tests.Api
         [Fact]
         public async Task Get_DefaultClient_ShouldSucceed()
         {
-            var actual = await _http
+            var blogPostVm = await _http
                 .DefaultClient
                 .GetBlogPostAsync(SeedConstants.PublishedBlogPost);
 
-            actual.Id.Should().Be(SeedConstants.PublishedBlogPost);
+            blogPostVm.Id.Should().Be(SeedConstants.PublishedBlogPost);
+            blogPostVm.BlogPostComments.Should().NotBeNullOrEmpty();
         }
 
         [Fact]

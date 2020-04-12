@@ -7,7 +7,7 @@ namespace Pygma.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
-        public DbSet<BlogPostComment> BlogPostComments { get; set; }
+        public DbSet<Comment> BlogPostComments { get; set; }
         public DbSet<Log> IncidentLogs { get; set; }
 
         public PygmaDbContext(DbContextOptions<PygmaDbContext> options)

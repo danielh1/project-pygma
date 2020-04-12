@@ -11,11 +11,11 @@ namespace Pygma.UatTests.TestDb.Seed
         {
             dbContext.SetInsertIdentity("BlogPostComments", true);
             
-            CreateBlogPostComment(dbContext, SeedConstants.PublishedBlogPostComment1, "testVisitor_1", 
+            CreateBlogPostComment(dbContext, SeedConstants.PublishedComment1, "testVisitor_1", 
                 "My Test Comment 1", SeedConstants.PublishedBlogPost);
-            CreateBlogPostComment(dbContext, SeedConstants.PublishedBlogPostComment2, "testVisitor_2", 
+            CreateBlogPostComment(dbContext, SeedConstants.PublishedComment2, "testVisitor_2", 
                 "My Test Comment 2", SeedConstants.PublishedBlogPost);
-            CreateBlogPostComment(dbContext, SeedConstants.InEditBlogPostComment, "testVisitor_3", 
+            CreateBlogPostComment(dbContext, SeedConstants.InEditComment, "testVisitor_3", 
                 "My Test Comment 3", SeedConstants.InEditBlogPost);
             
             dbContext.SaveChanges();
@@ -29,11 +29,11 @@ namespace Pygma.UatTests.TestDb.Seed
             string comment,
             int blogPostId)
         {
-            dbContext.BlogPostComments.Add(new BlogPostComment()
+            dbContext.BlogPostComments.Add(new Comment()
             {
                 Id = id,
                 VisitorName = visitorName,
-                Comment = comment,
+                CommentText = comment,
                 BlogPostId = blogPostId,
                 CreatedAt = DateTime.Now
             });

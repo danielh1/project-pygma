@@ -7,13 +7,13 @@ using Pygma.Data.Repositories.Base;
 
 namespace Pygma.Data.Repositories
 {
-    public class BlogPostCommentsRepository : RepositoryBase<BlogPostComment>, IBlogPostCommentsRepository
+    public class BlogPostCommentsRepository : RepositoryBase<Comment>, IBlogPostCommentsRepository
     {
         public BlogPostCommentsRepository(PygmaDbContext context) : base(context)
         {
         }
 
-        public Task<BlogPostComment> ReadByIdAndBlogPostIdAsync(int id, int blogPostId)
+        public Task<Comment> ReadByIdAndBlogPostIdAsync(int id, int blogPostId)
         {
             return DbTable
                 .Where(x => x.Id == id && x.BlogPostId == blogPostId)

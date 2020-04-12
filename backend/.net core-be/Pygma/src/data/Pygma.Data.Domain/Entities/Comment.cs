@@ -4,13 +4,13 @@ using Pygma.Data.Domain.Entities.Base;
 
 namespace Pygma.Data.Domain.Entities
 {
-    public class BlogPostComment: EntityBase
+    public class Comment: EntityBase
     {
         [Required]
         public string VisitorName { get; set; }
 
         [Required]
-        public string Comment { get; set; }
+        public string CommentText { get; set; }
 
         [Required]
         public int BlogPostId { get; set; }

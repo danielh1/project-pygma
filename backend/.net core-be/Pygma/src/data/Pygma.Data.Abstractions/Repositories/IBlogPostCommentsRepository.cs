@@ -3,8 +3,8 @@ using Pygma.Data.Domain.Entities;
 
 namespace Pygma.Data.Abstractions.Repositories
 {
-    public interface IBlogPostCommentsRepository : IRepositoryBase<BlogPostComment>
+    public interface IBlogPostCommentsRepository : IRepositoryBase<Comment>
     {
-        Task<BlogPostComment> ReadByIdAndBlogPostIdAsync(int id, int blogPostId);
+        Task<Comment> ReadByIdAndBlogPostIdAsync(int id, int blogPostId);
     }
 }

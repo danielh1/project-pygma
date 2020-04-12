@@ -11,6 +11,6 @@ namespace Pygma.Blog.ViewModels.Responses.BlogPosts
         public string Post { get; set; }
         public DateTime? PublishedAt { get; set; }
         public EnBlogPostStatus Status { get; set; }
-        public BlogPostComment[] BlogPostComments { get; set; }
+        public Comment[] BlogPostComments { get; set; }
     }
 }
