@@ -10,7 +10,7 @@ namespace Pygma.Data.Abstractions.Repositories
         new Task<int> CreateAsync(User user);
         Task<List<User>> ReadAllAsync();
         Task<User> ReadByEmailAndPasswordAsync(string email, string password);
-        new Task<int> UpdateAsync(User user);
+        new Task<int> UpdateAsync(User entity);
         new Task<int> DeleteAsync(User user);
     }
 }

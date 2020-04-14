@@ -41,11 +41,11 @@ namespace Pygma.Data.Repositories
             return DbTable.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
         }
         
-        public new async Task<int> UpdateAsync(User user)
+        public new async Task<int> UpdateAsync(User entity)
         {
-            user.UpdatedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
             
-            DbTable.Update(user);
+            DbTable.Update(entity);
 
             var result = await SaveChangesAsync();
 

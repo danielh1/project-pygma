@@ -40,11 +40,11 @@ namespace Pygma.Data.Repositories.Base
         public Task<List<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> where)
             => DbTable.Where(where).ToListAsync();
         
-        public async Task<int> UpdateAsync(TEntity user)
+        public async Task<int> UpdateAsync(TEntity entity)
         {
-            user.UpdatedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
 
-            DbTable.Update(user);
+            DbTable.Update(entity);
             return await SaveChangesAsync();
         }
 
