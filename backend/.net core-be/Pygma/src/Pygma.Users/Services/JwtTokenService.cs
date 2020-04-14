@@ -32,8 +32,7 @@ namespace Pygma.Users.Services
                 _config["Jwt:Issuer"],
                 claims:claims,
                 expires: DateTime.Now.AddDays(2),
-                signingCredentials: signingCredentials
-                );
+                signingCredentials: signingCredentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

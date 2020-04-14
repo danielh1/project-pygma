@@ -23,10 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\Pygma.App\Pygma.App.csproj" />
       <ProjectReference Include="..\..\..\src\Pygma.Users\Pygma.Users.csproj" />
     </ItemGroup>

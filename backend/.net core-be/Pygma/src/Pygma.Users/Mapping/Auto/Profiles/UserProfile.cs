@@ -11,6 +11,7 @@ namespace Pygma.Users.Mapping.Auto.Profiles
         {
             CreateMap<User, UserListItemVm>(MemberList.Destination);
             CreateMap<User, UserVm>(MemberList.Destination);
+            
             CreateMap<UpdateUserVm, User>(MemberList.Source);
         }
     }

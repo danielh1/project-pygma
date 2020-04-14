@@ -11,5 +11,6 @@ namespace Pygma.Data.SearchCriteria
         public DateTime? PublishedAtFrom { get; set; }
         public DateTime? PublishedAtTo { get; set; }
         public EnBlogPostStatus? Status { get; set; }
+        public string AuthorLastname { get; set; }
     }
 }

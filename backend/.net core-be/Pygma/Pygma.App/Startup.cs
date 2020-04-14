@@ -80,7 +80,10 @@ namespace Pygma.App
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            
+            app.UseAuthentication();
             app.UseAuthorization();
+            
             app.UseMiddleware(typeof(ProblemDetailsExceptionMiddleware));
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
@@ -106,11 +109,6 @@ namespace Pygma.App
             builder.RegisterType<UsersService>()
                 .As<IUsersService>()
                 .InstancePerLifetimeScope();
-            
-            // builder.RegisterType<OrderViewAccessServiceFilter>()
-            //     .InstancePerLifetimeScope();
-            // builder.RegisterType<OrderEditAccessServiceFilter>()
-            //     .InstancePerLifetimeScope();
         }
 
         public virtual void ConfigureAuth(IServiceCollection services, IConfiguration configuration)

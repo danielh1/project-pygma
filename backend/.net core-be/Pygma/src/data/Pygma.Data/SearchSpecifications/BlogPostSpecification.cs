@@ -9,9 +9,16 @@ namespace Pygma.Data.SearchSpecifications
     {
         public void SetCriteria(BlogPostSc sc)
         {
+            
             if (!string.IsNullOrWhiteSpace(sc.Title))
             {
                 Criteria.Add(x => x.Title.Contains(sc.Title));
+            }
+            
+            if (!string.IsNullOrWhiteSpace(sc.AuthorLastname))
+            {
+                AddInclude(x => x.Author);
+                Criteria.Add(x => x.Author.LastName.Contains(sc.AuthorLastname));
             }
         
             #region PublishedAt
@@ -35,6 +42,8 @@ namespace Pygma.Data.SearchSpecifications
             {
                 Criteria.Add(x => x.Status == sc.Status);
             }
+            
+            ApplyPagingAndOrder(sc);
         }
     }
 }

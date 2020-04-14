@@ -3,6 +3,5 @@
     public interface IBootstrapCacheService
     {
         void Invalidate();
-    } 
-    
+    }
 }

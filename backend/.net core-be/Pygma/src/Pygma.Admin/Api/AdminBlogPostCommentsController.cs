@@ -26,6 +26,18 @@ namespace Pygma.Admin.Api
         }
     
         #region CRUD
+        
+        [HttpGet("{commentId:int:min(1)}")]
+        public async Task<ActionResult<AdminCommentVm>> GetAdminBlogPostCommentAsync(int id, int commentId)
+        {
+            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
+    
+            return blogPostComment == null 
+                ? (ActionResult<AdminCommentVm>) NotFound($"Blog post comment {commentId} not found") 
+                : _mapper.Map<AdminCommentVm>(blogPostComment);
+        }
+
+        
         [HttpPost]
         public async Task<ActionResult<int>> CreateAdminBlogPostCommentAsync(int id,
             [FromBody] CreateAdminCommentVm createCommentVm)
@@ -38,16 +50,6 @@ namespace Pygma.Admin.Api
             await _blogPostCommentsRepository.CreateAsync(comment);
 
             return comment.Id;
-        }
-        
-        [HttpGet("{commentId:int:min(1)}")]
-        public async Task<ActionResult<AdminCommentVm>> GetAdminBlogPostCommentAsync(int id, int commentId)
-        {
-            var blogPostComment = await _blogPostCommentsRepository.ReadByIdAndBlogPostIdAsync(commentId, id);
-    
-            return blogPostComment == null 
-                ? (ActionResult<AdminCommentVm>) NotFound($"Blog post comment {commentId} not found") 
-                : _mapper.Map<AdminCommentVm>(blogPostComment);
         }
         
         [HttpDelete("{commentId:int:min(1)}")]

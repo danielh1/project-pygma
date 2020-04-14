@@ -23,10 +23,6 @@ namespace Pygma.App.Autofac.Modules
                     .AsImplementedInterfaces()
                     .InstancePerLifetimeScope();
 
-//                builder.RegisterType<FluentValidationModelValidatorProvider>().As<ModelValidatorProvider>();
-//
-//                builder.RegisterType<AutofacValidatorFactory>().As<IValidatorFactory>().SingleInstance();
-
                 base.Load(builder);
             }
         }

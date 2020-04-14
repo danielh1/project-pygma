@@ -25,5 +25,8 @@ namespace Pygma.Blog.ViewModels.Requests.BlogPosts
 
         [FromQuery(Name = "publishedAtTo")]
         public DateTime? PublishedAtTo { get; set; }
+        
+        [FromQuery(Name = "authorLastname")]
+        public string AuthorLastname { get; set; }
     }
 }
