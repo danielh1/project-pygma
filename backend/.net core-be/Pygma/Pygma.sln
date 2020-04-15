@@ -13,31 +13,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{34CA0715-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{20FE44F0-07A5-4B26-8605-41CC9ACC7781}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Data", "src\data\Pygma.Data\Pygma.Data.csproj", "{C6D5AB03-B66F-485A-A8EF-5DC995E0A7DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Data", "src\data\Pygma.Data\Pygma.Data.csproj", "{C6D5AB03-B66F-485A-A8EF-5DC995E0A7DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Data.Abstractions", "src\data\Pygma.Data.Abstractions\Pygma.Data.Abstractions.csproj", "{2D7CF4E1-B5FB-45D2-9836-794749521148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Data.Abstractions", "src\data\Pygma.Data.Abstractions\Pygma.Data.Abstractions.csproj", "{2D7CF4E1-B5FB-45D2-9836-794749521148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Data.Domain", "src\data\Pygma.Data.Domain\Pygma.Data.Domain.csproj", "{B87FB499-CFF7-46C2-9A05-E40E50404B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Data.Domain", "src\data\Pygma.Data.Domain\Pygma.Data.Domain.csproj", "{B87FB499-CFF7-46C2-9A05-E40E50404B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Services.Users", "src\services\Pygma.Services.Users\Pygma.Services.Users.csproj", "{801668DC-2EA2-40C4-94D4-C8EA54F706E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Services.Users", "src\services\Pygma.Services.Users\Pygma.Services.Users.csproj", "{801668DC-2EA2-40C4-94D4-C8EA54F706E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Blog", "src\Pygma.Blog\Pygma.Blog.csproj", "{BB8C4E3D-42A5-42B2-A7FC-6F1C06A24480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Blog", "src\Pygma.Blog\Pygma.Blog.csproj", "{BB8C4E3D-42A5-42B2-A7FC-6F1C06A24480}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Admin", "src\Pygma.Admin\Pygma.Admin.csproj", "{3494ABC0-1ACC-4584-A486-D9AAF5C89258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Admin", "src\Pygma.Admin\Pygma.Admin.csproj", "{3494ABC0-1ACC-4584-A486-D9AAF5C89258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Common", "src\Pygma.Common\Pygma.Common.csproj", "{1E75D3ED-2E67-4327-884C-C16CFF8329C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Common", "src\Pygma.Common\Pygma.Common.csproj", "{1E75D3ED-2E67-4327-884C-C16CFF8329C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{21B7C182-1B0E-4F32-B5EB-0A4B62747C3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "uat", "uat", "{B78E8BD3-F47A-4C01-88A2-823A93E4892E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Users", "src\Pygma.Users\Pygma.Users.csproj", "{CD6629EA-1FF9-405D-911F-28308DB46436}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Users", "src\Pygma.Users\Pygma.Users.csproj", "{CD6629EA-1FF9-405D-911F-28308DB46436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.UatTests", "tests\uat\Pygma.UatTests\Pygma.UatTests.csproj", "{60154232-447D-4E56-A60F-8B0175E05F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.UatTests", "tests\uat\Pygma.UatTests\Pygma.UatTests.csproj", "{60154232-447D-4E56-A60F-8B0175E05F15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.Pygma.App.UnitTests", "tests\unit\Backbone.Pygma.App.UnitTests\Backbone.Pygma.App.UnitTests.csproj", "{38C96DD9-A1E6-41A0-90DD-E0EBB996AD23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.App.UnitTests", "tests\unit\Pygma.App.UnitTests\Pygma.App.UnitTests.csproj", "{38C96DD9-A1E6-41A0-90DD-E0EBB996AD23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pygma.Services.Bootstrapper", "src\services\Pygma.Services.Bootstrapper\Pygma.Services.Bootstrapper.csproj", "{F52EEA63-9A80-4FCF-BF9C-D9118A3C02BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pygma.Services.Bootstrapper", "src\services\Pygma.Services.Bootstrapper\Pygma.Services.Bootstrapper.csproj", "{F52EEA63-9A80-4FCF-BF9C-D9118A3C02BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

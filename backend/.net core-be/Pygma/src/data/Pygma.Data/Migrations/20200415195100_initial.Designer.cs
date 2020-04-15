@@ -10,8 +10,8 @@ using Pygma.Data;
 namespace Pygma.Data.Migrations
 {
     [DbContext(typeof(PygmaDbContext))]
-    [Migration("20200408100533_userPassword")]
-    partial class userPassword
+    [Migration("20200415195100_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace Pygma.Data.Migrations
                     b.ToTable("BlogPosts");
                 });
 
-            modelBuilder.Entity("Pygma.Data.Domain.Entities.BlogPostComment", b =>
+            modelBuilder.Entity("Pygma.Data.Domain.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace Pygma.Data.Migrations
                     b.Property<int>("BlogPostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
+                    b.Property<string>("CommentText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -96,22 +96,27 @@ namespace Pygma.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IncidentType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
+                    b.Property<string>("Exception")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<string>("Level")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageTemplate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("IncidentLogs");
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("Pygma.Data.Domain.Entities.User", b =>
@@ -169,7 +174,7 @@ namespace Pygma.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Pygma.Data.Domain.Entities.BlogPostComment", b =>
+            modelBuilder.Entity("Pygma.Data.Domain.Entities.Comment", b =>
                 {
                     b.HasOne("Pygma.Data.Domain.Entities.BlogPost", "BlogPost")
                         .WithMany("BlogPostComments")

@@ -3,7 +3,7 @@ using AutoMapper;
 using Pygma.Users.Mapping.Auto.Profiles;
 using Xunit;
 
-namespace Backbone.Pygma.App.UnitTests
+namespace Pygma.App.UnitTests
 {
     public class AutoMapperConfigTests
     {

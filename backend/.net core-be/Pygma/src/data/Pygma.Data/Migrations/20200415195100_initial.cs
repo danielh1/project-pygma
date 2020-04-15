@@ -8,19 +8,21 @@ namespace Pygma.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "IncidentLogs",
+                name: "Logs",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Message = table.Column<string>(nullable: false),
-                    IncidentType = table.Column<int>(nullable: false)
+                    Message = table.Column<string>(nullable: true),
+                    MessageTemplate = table.Column<string>(nullable: true),
+                    Level = table.Column<string>(nullable: true),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    Exception = table.Column<string>(nullable: true),
+                    Properties = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentLogs", x => x.Id);
+                    table.PrimaryKey("PK_Logs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,6 +36,7 @@ namespace Pygma.Data.Migrations
                     FirstName = table.Column<string>(maxLength: 50, nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
+                    Password = table.Column<string>(maxLength: 50, nullable: false),
                     Role = table.Column<string>(nullable: false),
                     Active = table.Column<bool>(nullable: false)
                 },
@@ -76,7 +79,7 @@ namespace Pygma.Data.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     VisitorName = table.Column<string>(nullable: false),
-                    Comment = table.Column<string>(nullable: false),
+                    CommentText = table.Column<string>(nullable: false),
                     BlogPostId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -113,7 +116,7 @@ namespace Pygma.Data.Migrations
                 name: "BlogPostComments");
 
             migrationBuilder.DropTable(
-                name: "IncidentLogs");
+                name: "Logs");
 
             migrationBuilder.DropTable(
                 name: "BlogPosts");

@@ -85,7 +85,8 @@ namespace Pygma.UatTests.Tests.Api
                 {
                     Title = "Test Post Updated",
                     Post = "Test content Updated",
-                    Status = EnBlogPostStatus.Published
+                    Status = EnBlogPostStatus.Published,
+                    AuthorId = SeedConstants.AuthorUser
                 });
             
             var actual = await _http
@@ -96,6 +97,31 @@ namespace Pygma.UatTests.Tests.Api
             actual.Title.Should().Be("Test Post Updated");
             actual.Post.Should().Be("Test content Updated");
             actual.Status.Should().Be(EnBlogPostStatus.Published);
+        }
+        
+        [Fact]
+        public async Task Update_BadRequest()
+        {
+            var blogPostId = await _http
+                .AuthorClient
+                .CreateBlogPostAsync(new CreateBlogPostVm()
+                {
+                    Title = "Test Post",
+                    Post = "Test content",
+                    Status = EnBlogPostStatus.InEdit
+                });
+
+            blogPostId.Should().BeGreaterThan(0);
+            
+            await _http
+                .AdminClient
+                .UpdateBlogPostAsync(blogPostId, new UpdateBlogPostVm()
+                {
+                    Title = "Test Post Updated",
+                    Post = "Test content Updated",
+                    Status = EnBlogPostStatus.Published,
+                    AuthorId = 0 // -> This will throw validation error
+                }, HttpStatusCode.BadRequest);
         }
         
         [Fact]

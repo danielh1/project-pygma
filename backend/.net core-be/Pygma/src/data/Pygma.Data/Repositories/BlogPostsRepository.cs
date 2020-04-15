@@ -15,7 +15,9 @@ namespace Pygma.Data.Repositories
 
         public Task<BlogPost> ReadByIdWithCommentsAsync(int id)
         {
-            return DbTable.Include(x => x.BlogPostComments).FirstOrDefaultAsync();
+            return DbTable
+                .Include(x => x.BlogPostComments)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

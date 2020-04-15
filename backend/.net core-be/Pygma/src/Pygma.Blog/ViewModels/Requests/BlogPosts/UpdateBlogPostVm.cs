@@ -11,6 +11,6 @@ namespace Pygma.Blog.ViewModels.Requests.BlogPosts
         
         public EnBlogPostStatus Status { get; set; }
         
-        public int? AuthorId { get; set; }
+        public int AuthorId { get; set; }
     }
 }

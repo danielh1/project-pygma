@@ -33,8 +33,6 @@ namespace Pygma.UatTests.Tests.Api
             users.Should().NotBeNullOrEmpty()
                 .And.NotContainNulls();
 
-            users.Length.Should().Be(3);
-
             var exception = Record.Exception(() => users.Single(x => x.Id == SeedConstants.AdminUser));
             Assert.Null(exception);
             exception = Record.Exception(() => users.Single(x => x.Id == SeedConstants.AuthorUser));

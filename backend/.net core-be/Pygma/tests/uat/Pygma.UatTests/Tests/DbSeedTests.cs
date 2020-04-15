@@ -6,7 +6,7 @@ namespace Pygma.UatTests.Tests
 {
     public class DbSeedTests
     {
-        [Fact]
+        //[Fact]
         public void EnsureDbSeed()
         {
             var db = DbExtensions.CreateSqlDbContext();

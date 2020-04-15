@@ -18,8 +18,7 @@ namespace Pygma.Blog.Validations.BlogPosts
                 RuleFor(x => x)
                     .Custom((x, context) =>
                     {
-                        if (x.AuthorId == null
-                        || usersCache.GetById(x.AuthorId.Value) == null)
+                        if (usersCache.GetById(x.AuthorId) == null)
                         {
                             context.AddFailure("authorId", "Wrong Author Id");
                         }
