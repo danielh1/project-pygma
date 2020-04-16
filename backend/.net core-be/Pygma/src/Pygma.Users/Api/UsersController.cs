@@ -6,7 +6,9 @@ using Pygma.Common.Constants;
 using Pygma.Common.Models.Base;
 using Pygma.Data.Abstractions.Repositories;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Users;
 using Pygma.Users.ViewModels.Responses;
+using Pygma.Users.ViewModels.Responses.Users;
 
 namespace Pygma.Users.Api
 {

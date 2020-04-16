@@ -10,6 +10,7 @@ namespace Pygma.Data.Domain.Entities
     public class BlogPost: EntityBase
     {
         [Required]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [Required]

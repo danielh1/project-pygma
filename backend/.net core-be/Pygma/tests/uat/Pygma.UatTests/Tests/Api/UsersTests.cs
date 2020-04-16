@@ -9,6 +9,8 @@ using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
 using Pygma.UatTests.TestDb.Seed;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Account;
+using Pygma.Users.ViewModels.Requests.Users;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Api
@@ -90,7 +92,7 @@ namespace Pygma.UatTests.Tests.Api
                 .UpdateUserAsync(newUser.Id, new UpdateUserVm()
                 {
                     Active = true,
-                    FirstName = "Test updated name"
+                    Firstname = "Test updated name"
                 });
 
             var updatedUser = (await _http.AdminClient

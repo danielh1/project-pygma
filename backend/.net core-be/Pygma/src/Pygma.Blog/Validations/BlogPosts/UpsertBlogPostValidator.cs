@@ -1,5 +1,6 @@
 using FluentValidation;
 using Pygma.Blog.ViewModels.Requests.Abstractions;
+using Pygma.Common.Extensions;
 
 namespace Pygma.Blog.Validations.BlogPosts
 {
@@ -8,8 +9,7 @@ namespace Pygma.Blog.Validations.BlogPosts
         public UpsertBlogPostValidator()
         {
             RuleFor(x => x.Title)
-                .NotNull()
-                .NotEmpty();
+                .ValidateGeneralStringRequired(50);
             
             RuleFor(x => x.Post)
                 .NotNull()

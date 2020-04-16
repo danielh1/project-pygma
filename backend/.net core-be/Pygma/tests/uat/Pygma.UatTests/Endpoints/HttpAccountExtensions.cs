@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pygma.UatTests.Extensions;
 using Pygma.Users.Models;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Account;
 
 namespace Pygma.UatTests.Endpoints
 {

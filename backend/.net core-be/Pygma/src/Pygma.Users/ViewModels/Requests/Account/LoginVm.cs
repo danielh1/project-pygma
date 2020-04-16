@@ -1,4 +1,4 @@
-namespace Pygma.Users.ViewModels.Requests
+namespace Pygma.Users.ViewModels.Requests.Account
 {
     public class LoginVm
     {

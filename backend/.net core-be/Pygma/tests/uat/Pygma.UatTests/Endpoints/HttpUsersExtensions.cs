@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pygma.UatTests.Extensions;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Users;
 using Pygma.Users.ViewModels.Responses;
+using Pygma.Users.ViewModels.Responses.Users;
 
 namespace Pygma.UatTests.Endpoints
 {

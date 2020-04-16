@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pygma.Users.ViewModels.Responses
+namespace Pygma.Users.ViewModels.Responses.Users
 {
     public class UserVm
     {

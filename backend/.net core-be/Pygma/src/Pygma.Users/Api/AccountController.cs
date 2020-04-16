@@ -13,6 +13,7 @@ using Pygma.Data.Domain.Entities;
 using Pygma.Users.Models;
 using Pygma.Users.Services;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Account;
 
 namespace Pygma.Users.Api
 {

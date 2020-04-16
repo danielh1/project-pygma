@@ -10,6 +10,7 @@ using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
 using Pygma.Users.ViewModels.Requests;
+using Pygma.Users.ViewModels.Requests.Account;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Api

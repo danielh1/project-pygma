@@ -2,16 +2,14 @@
 {
     public class ValidationError
     {
-        private string _key;
-        private string _errorMessage;
-
-        public ValidationError(string key, string errorMessage)
+        public ValidationError(string field, string errorMessage)
         {
-            this._key = key;
-            this._errorMessage = errorMessage;
+            this.Field = field;
+            this.Message = errorMessage;
         }
 
-        public string Field { get; set; }
-        public string Message { get; set; }
+        public string Field { get; }
+
+        public string Message { get; }
     }
 }
