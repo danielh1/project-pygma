@@ -23,7 +23,7 @@ namespace Pygma.App
                 .CreateLogger();
 
             Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
-            
+
             try
             {
                 CreateHostBuilder(args)

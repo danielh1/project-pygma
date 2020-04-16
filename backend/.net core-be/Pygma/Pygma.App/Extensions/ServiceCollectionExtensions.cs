@@ -1,13 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Pygma.Data;
+using AutoMapper;
 
 namespace Pygma.App.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        public static void AddAutoMapperService(this IServiceCollection services)
+        {
+            var runtimeAssemblies = AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .Where(x => x.FullName.Contains("Pygma"))
+                .ToList();
+
+            services.AddAutoMapper(runtimeAssemblies);
+        }
+        
         public static void AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

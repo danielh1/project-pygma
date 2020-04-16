@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Text;
 using Autofac;
-using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Pygma.App.Autofac.Modules;
 using Pygma.App.Extensions;
@@ -57,13 +57,7 @@ namespace Pygma.App
 
             ConfigureAuth(services, Configuration);
 
-            var runtimeAssemblies = AppDomain
-                .CurrentDomain
-                .GetAssemblies()
-                .Where(x => x.FullName.Contains("Pygma"))
-                .ToList();
-
-            services.AddAutoMapper(runtimeAssemblies);
+            services.AddAutoMapperService();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,6 +86,7 @@ namespace Pygma.App
             
             app.UseMiddleware(typeof(ProblemDetailsExceptionMiddleware));
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
