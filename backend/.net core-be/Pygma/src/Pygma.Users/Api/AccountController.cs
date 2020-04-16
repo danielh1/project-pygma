@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Pygma.Common.Constants;
 using Pygma.Common.Filters;
 using Pygma.Common.Models.Base;
@@ -22,13 +23,16 @@ namespace Pygma.Users.Api
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IJwtTokenService _jwtTokenService;
-        
+        private readonly ILogger<AccountController> _logger;
+
         public AccountController(
             IUsersRepository usersRepository,
-            IJwtTokenService jwtTokenService)
+            IJwtTokenService jwtTokenService,
+            ILogger<AccountController> logger)
         {
             _usersRepository = usersRepository;
             _jwtTokenService = jwtTokenService;
+            _logger = logger;
         }
 
         [HttpPost("registration")]
@@ -61,18 +65,23 @@ namespace Pygma.Users.Api
         }
         
         [HttpPost("login")]
+        //[AllowAnonymous]
+        //[SkipInactiveUserFilter]
         public async Task<ActionResult<Jwt>> LoginAsync([FromBody] LoginVm loginVm)
         {
             var user = await _usersRepository.ReadByEmailAndPasswordAsync(loginVm.Email, Encryption.Encrypt(loginVm.Password));
 
             if (user == null)
             {
+                _logger.LogInformation("Unauthorized user attempted log in");
+                
                 return Unauthorized();
             }
             var tokenString = _jwtTokenService.BuildToken(user);
                 
+            _logger.LogInformation($"User {user.Email} logged in");
+            
             return Ok(new Jwt() { Token = tokenString });
-
         }
     }
 }

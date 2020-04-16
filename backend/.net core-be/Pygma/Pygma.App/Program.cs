@@ -30,6 +30,10 @@ namespace Pygma.App
                     .Build()
                     .Run();
             }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
             finally
             {
                 Log.CloseAndFlush();
@@ -39,6 +43,7 @@ namespace Pygma.App
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
