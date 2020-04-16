@@ -2,7 +2,6 @@
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Pygma.Common.Constants;
-using Pygma.Services.Users.Extensions;
 
 namespace Pygma.UatTests.Stubs
 {

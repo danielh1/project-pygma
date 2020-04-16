@@ -1,4 +1,3 @@
-using System;
 using Pygma.Blog.ViewModels.Requests.Abstractions;
 using Pygma.Data.Domain.Enums;
 

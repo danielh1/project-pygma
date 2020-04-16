@@ -2,14 +2,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AutoFixture;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
 using Pygma.UatTests.TestDb.Seed;
 using Pygma.Users.ViewModels.Requests;
-using Pygma.Users.ViewModels.Responses;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Api
@@ -75,7 +74,7 @@ namespace Pygma.UatTests.Tests.Api
                 {
                     Email = "test@test.com",
                     Firstname = "Test name",
-                    Password = "TestPass"
+                    Password = "1234"
                 });
 
             var newUser = (await _http.AdminClient
@@ -108,7 +107,7 @@ namespace Pygma.UatTests.Tests.Api
                 .RegisterAsync(new RegisterAccountVm()
                 {
                     Email = "test@test.com",
-                    Password = "TestPass"
+                    Password = "1234"
                 });
 
             var newUser = (await _http.AdminClient

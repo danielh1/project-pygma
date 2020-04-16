@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using Pygma.Services.Users;
 using Pygma.UatTests.Extensions;
 using Pygma.UatTests.Stubs;
 

@@ -1,6 +1,4 @@
-﻿using Pygma.Common.Abstractions;
-
-namespace Pygma.Common.Models.Base
+﻿namespace Pygma.Common.Models.Base
 {
     public class BaseVm
     {

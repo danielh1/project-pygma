@@ -9,7 +9,7 @@ namespace Pygma.Services.Users.Extensions
         public static string GetEmail(this IIdentity identity)
         {
             var claimsIdentity = identity as ClaimsIdentity;
-            var claim = claimsIdentity?.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+            var claim = claimsIdentity?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
 
             return claim?.Value ?? string.Empty;
         }

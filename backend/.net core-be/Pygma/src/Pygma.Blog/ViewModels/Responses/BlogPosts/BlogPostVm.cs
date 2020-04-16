@@ -1,6 +1,5 @@
 using System;
 using Pygma.Blog.ViewModels.Responses.Comments;
-using Pygma.Data.Domain.Entities;
 using Pygma.Data.Domain.Enums;
 
 namespace Pygma.Blog.ViewModels.Responses.BlogPosts

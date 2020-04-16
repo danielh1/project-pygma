@@ -1,5 +1,4 @@
-﻿using System.Security.Authentication;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Pygma.Data.Abstractions.Cache;
 using Pygma.Data.Domain.Entities;

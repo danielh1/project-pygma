@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Pygma.UatTests.TestDb;
-using Xunit;
 
 namespace Pygma.UatTests.Tests
 {

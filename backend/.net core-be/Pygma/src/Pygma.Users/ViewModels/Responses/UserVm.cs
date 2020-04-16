@@ -1,5 +1,4 @@
 ﻿using System;
-using Pygma.Common.Abstractions;
 
 namespace Pygma.Users.ViewModels.Responses
 {

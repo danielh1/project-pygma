@@ -1,7 +1,6 @@
 using System.Net;
 using System.Threading.Tasks;
-using Pygma.Blog.ViewModels.Requests.BlogPosts;
-using Pygma.Data.Domain.Enums;
+using AutoFixture;
 using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
@@ -27,7 +26,7 @@ namespace Pygma.UatTests.Tests.Flows
                 .LoginAsync(new LoginVm()
                 {
                     Email = "withoutRegistration@mymail.com",
-                    Password = "1234"
+                    Password = Fixture.Create<string>()
                 }, HttpStatusCode.Unauthorized);
         }
 
@@ -40,8 +39,8 @@ namespace Pygma.UatTests.Tests.Flows
                 {
                     Email = "registerAndLogin@mymail.com",
                     Password = "1234",
-                    Firstname = "Firstname_myTestMail",
-                    Lastname = "Lastname_myTestMail"
+                    Firstname = Fixture.Create<string>(),
+                    Lastname = Fixture.Create<string>()
                 });
 
             await _http

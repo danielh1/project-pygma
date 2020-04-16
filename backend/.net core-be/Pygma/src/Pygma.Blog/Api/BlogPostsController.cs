@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +13,6 @@ using Pygma.Data.Abstractions.Repositories;
 using Pygma.Data.Domain.Entities;
 using Pygma.Data.Domain.Enums;
 using Pygma.Data.SearchCriteria;
-using Pygma.Data.SearchSpecifications;
 using Pygma.Services.Users;
 
 namespace Pygma.Blog.Api

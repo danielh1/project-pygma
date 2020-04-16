@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoFixture;
 using FluentAssertions;
 using Pygma.Common.Constants;
 using Pygma.UatTests.Base;
@@ -29,11 +30,11 @@ namespace Pygma.UatTests.Tests.Api
                 .DefaultClient
                 .RegisterAsync(new RegisterAccountVm
                 {
-                    Firstname = "Firstname_test",
-                    Lastname = "Lastname_test",
+                    Firstname = Fixture.Create<string>(),
+                    Lastname = Fixture.Create<string>(),
                     Email = "test_register@mymail.com",
                     Password = "test"
-                }, HttpStatusCode.NoContent);
+                });
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace Pygma.UatTests.Tests.Api
                 .LoginAsync(new LoginVm()
                 {
                     Email = "admin@mymail.com",
-                    Password = "wrongPass"
+                    Password = Fixture.Create<string>()
                 }, HttpStatusCode.Unauthorized);
 
             actual.Should().BeNull();

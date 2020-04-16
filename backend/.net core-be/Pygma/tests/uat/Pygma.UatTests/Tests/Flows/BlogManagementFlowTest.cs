@@ -1,12 +1,13 @@
 using System.Net;
 using System.Threading.Tasks;
+using AutoFixture;
+using FluentAssertions;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
 using Pygma.Data.Domain.Enums;
 using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
 using Pygma.UatTests.TestDb.Seed;
-using Pygma.Users.ViewModels.Requests;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Flows
@@ -28,8 +29,8 @@ namespace Pygma.UatTests.Tests.Flows
                 .AuthorClient
                 .CreateBlogPostAsync(new CreateBlogPostVm()
                 {
-                    Title = "Test Blog Post management",
-                    Post = "A nice flow to test our application",
+                    Title = Fixture.Create<string>(),
+                    Post = Fixture.Create<string>(),
                     Status = EnBlogPostStatus.InEdit
                 });
             // 2. Try to access the Blog Post from default client, should fail (Not Found)
@@ -47,9 +48,14 @@ namespace Pygma.UatTests.Tests.Flows
                     AuthorId = SeedConstants.AuthorUser
                 });
             // 4. Try to access the Blog Post from default client, should succeed
-            await _http
+            var blogPost = await _http
                 .DefaultClient
                 .GetBlogPostAsync(blogPostId);
+
+            blogPost.Title.Should().Be("Test Blog Post management Updated");
+            blogPost.Post.Should().Be("A nice flow to test our application Updated");
+            blogPost.Status.Should().Be(EnBlogPostStatus.Published);
+            
             // 5. Delete Blog Post
             await _http
                 .AdminClient

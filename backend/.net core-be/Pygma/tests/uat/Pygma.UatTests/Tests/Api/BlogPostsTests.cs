@@ -1,5 +1,6 @@
 using System.Net;
 using System.Threading.Tasks;
+using AutoFixture;
 using FluentAssertions;
 using Pygma.Blog.ViewModels.Requests.BlogPosts;
 using Pygma.Data.Domain.Enums;
@@ -7,7 +8,6 @@ using Pygma.UatTests.Base;
 using Pygma.UatTests.Endpoints;
 using Pygma.UatTests.Infrastructure;
 using Pygma.UatTests.TestDb.Seed;
-using Pygma.Users.ViewModels.Requests;
 using Xunit;
 
 namespace Pygma.UatTests.Tests.Api
@@ -72,8 +72,8 @@ namespace Pygma.UatTests.Tests.Api
                 .AuthorClient
                 .CreateBlogPostAsync(new CreateBlogPostVm()
                 {
-                    Title = "Test Post",
-                    Post = "Test content",
+                    Title = Fixture.Create<string>(),
+                    Post = Fixture.Create<string>(),
                     Status = EnBlogPostStatus.InEdit
                 });
 
@@ -106,8 +106,8 @@ namespace Pygma.UatTests.Tests.Api
                 .AuthorClient
                 .CreateBlogPostAsync(new CreateBlogPostVm()
                 {
-                    Title = "Test Post",
-                    Post = "Test content",
+                    Title = Fixture.Create<string>(),
+                    Post = Fixture.Create<string>(),
                     Status = EnBlogPostStatus.InEdit
                 });
 
@@ -131,8 +131,8 @@ namespace Pygma.UatTests.Tests.Api
                 .AuthorClient
                 .CreateBlogPostAsync(new CreateBlogPostVm()
                 {
-                    Title = "Test Post",
-                    Post = "Test content",
+                    Title = Fixture.Create<string>(),
+                    Post = Fixture.Create<string>(),
                     Status = EnBlogPostStatus.InEdit
                 });
 
