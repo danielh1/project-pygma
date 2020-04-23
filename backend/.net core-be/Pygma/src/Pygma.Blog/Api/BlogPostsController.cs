@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -44,7 +45,7 @@ namespace Pygma.Blog.Api
         public async Task<ActionResult<SearchResultsVm<BlogPostSrVm[]>>> SearchAsync(
             [FromQuery] SearchBlogPostVm searchBlogPostVm)
         {
-            return await _blogPostsService.SearchAsync(_mapper.Map<BlogPostSc>(searchBlogPostVm));
+            return await _blogPostsService.SearchBlogPostsAsync(_mapper.Map<BlogPostSc>(searchBlogPostVm));
         }
 
         [HttpGet("{id:int:min(1)}", Name = nameof(GetBlogPostAsync))]
@@ -80,7 +81,14 @@ namespace Pygma.Blog.Api
                 return NotFound();
             }
 
-            await _blogPostsRepository.UpdateAsync(_mapper.Map(updateBlogPostVm, blogPost));
+            _mapper.Map(updateBlogPostVm, blogPost);
+
+            if (updateBlogPostVm.Status == EnBlogPostStatus.Published)
+            {
+                blogPost.PublishedAt = DateTime.Now;
+            }
+
+            await _blogPostsRepository.UpdateAsync(blogPost);
 
             return NoContent();
         }

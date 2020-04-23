@@ -5,14 +5,13 @@ using Pygma.Data.Domain.Enums;
 
 namespace Pygma.Blog.ViewModels.Requests.BlogPosts
 {
-    public enum EnBlogPostOrderField
+    public enum EnBlogPostOrderByField
     {        
-        Title,
-        PublishedAtFrom,
-        PublishedAtTo
+        Title = 1,
+        PublishedAt = 2
     }
 
-    public class SearchBlogPostVm : SearchBase<EnBlogPostOrderField>
+    public class SearchBlogPostVm : SearchBase<EnBlogPostOrderByField>
     {
         [FromQuery(Name = "title")]
         public string Title { get; set; }

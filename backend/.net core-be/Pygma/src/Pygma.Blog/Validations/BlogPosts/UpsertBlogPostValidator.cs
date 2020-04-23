@@ -8,6 +8,8 @@ namespace Pygma.Blog.Validations.BlogPosts
     {
         public UpsertBlogPostValidator()
         {
+            RuleFor(x => x.Status).IsInEnum();
+            
             RuleFor(x => x.Title)
                 .ValidateGeneralStringRequired(50);
             

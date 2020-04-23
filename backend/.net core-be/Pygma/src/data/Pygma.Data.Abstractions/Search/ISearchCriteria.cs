@@ -7,7 +7,7 @@ namespace Pygma.Data.Abstractions.Search
     public interface ISearchCriteria<T>
     {
         Expression<Func<T, object>> OrderBy { get; set; }
-        EnOrderByDirection OrderByByDirection { get; set; }
+        EnOrderByDirection OrderByDirection { get; set; }
         int Skip { get; set; }
         int Take { get; set; }
     }

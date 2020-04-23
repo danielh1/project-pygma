@@ -7,6 +7,6 @@ namespace Pygma.Blog.Services.Abstractions
 {
     public interface IBlogPostsService
     {
-        Task<SearchResultsVm<BlogPostSrVm[]>> SearchAsync(BlogPostSc sc);
+        Task<SearchResultsVm<BlogPostSrVm[]>> SearchBlogPostsAsync(BlogPostSc sc);
     }
 }

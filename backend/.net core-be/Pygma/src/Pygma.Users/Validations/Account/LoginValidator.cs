@@ -10,8 +10,7 @@ namespace Pygma.Users.Validations.Account
         {
             RuleFor(x => x.Email)
                 .EmailAddress()
-                .ValidateGeneralStringRequired(50)
-                .WithName("test");
+                .ValidateGeneralStringRequired(50);
             RuleFor(x => x.Password)
                 .ValidateGeneralStringRequired(50);
         }

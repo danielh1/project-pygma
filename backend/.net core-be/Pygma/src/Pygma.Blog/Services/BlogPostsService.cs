@@ -27,7 +27,7 @@ namespace Pygma.Blog.Services
             _mapper = mapper;
         }
         
-        public async Task<SearchResultsVm<BlogPostSrVm[]>> SearchAsync(BlogPostSc sc)
+        public async Task<SearchResultsVm<BlogPostSrVm[]>> SearchBlogPostsAsync(BlogPostSc sc)
         {
             //Visitors can only view published blog posts
             if (_usersService.GetUser() == null)

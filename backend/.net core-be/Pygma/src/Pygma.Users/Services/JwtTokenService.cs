@@ -26,6 +26,7 @@ namespace Pygma.Users.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.Email, user.Email),
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
