@@ -75,7 +75,8 @@ namespace Pygma.UatTests.Tests.Api
                 .RegisterAsync(new RegisterAccountVm()
                 {
                     Email = "test@test.com",
-                    Firstname = "Test name",
+                    Firstname = "test",
+                    Lastname = "test",
                     Password = "1234"
                 });
 
@@ -85,21 +86,24 @@ namespace Pygma.UatTests.Tests.Api
 
             Debug.Assert(newUser != null, nameof(newUser) + " != null");
 
-            newUser.FirstName.Should().Be("Test name");
+            newUser.FirstName.Should().Be("test");
+            newUser.LastName.Should().Be("test");
             newUser.Active.Should().BeFalse();
 
             await _http.AdminClient
                 .UpdateUserAsync(newUser.Id, new UpdateUserVm()
                 {
                     Active = true,
-                    Firstname = "Test updated name"
+                    Firstname = "Test updated firstname",
+                    Lastname = "Test updated lastname"
                 });
 
             var updatedUser = (await _http.AdminClient
                 .GetUserAsync(newUser.Id));
 
             updatedUser.Active.Should().BeTrue();
-            updatedUser.FirstName.Should().Be("Test updated name");
+            updatedUser.FirstName.Should().Be("Test updated firstname");
+            updatedUser.LastName.Should().Be("Test updated lastname");
         }
 
         [Fact]
@@ -108,13 +112,15 @@ namespace Pygma.UatTests.Tests.Api
             await _http.AdminClient
                 .RegisterAsync(new RegisterAccountVm()
                 {
-                    Email = "test@test.com",
+                    Firstname = "test",
+                    Lastname = "test",
+                    Email = "test_delete@test.com",
                     Password = "1234"
                 });
 
             var newUser = (await _http.AdminClient
                     .GetAllUsersAsync())
-                .FirstOrDefault(x => x.Email == "test@test.com");
+                .FirstOrDefault(x => x.Email == "test_delete@test.com");
 
             Debug.Assert(newUser != null, nameof(newUser) + " != null");
 
@@ -123,7 +129,7 @@ namespace Pygma.UatTests.Tests.Api
 
             newUser = (await _http.AdminClient
                     .GetAllUsersAsync())
-                .FirstOrDefault(x => x.Email == "test@test.com");
+                .FirstOrDefault(x => x.Email == "test_delete@test.com");
 
             newUser.Should().BeNull();
         }
