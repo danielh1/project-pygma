@@ -1,0 +1,9 @@
+why new is neccessary for IUsersRepository functions?
+repository base, user parameter
+kati Generic gia ta autofac Modules
+sto start up app.UseHsts(); k redirect ?
+UserController Async on function names
+mipos to api/ mporei na figei ?
+Rename BlogPostCommentProfile... to CommentProfile
+BlogPostController check if blogPost is not found
+sta tests mipos na min epanalambano sinexeia ton constructor ?
